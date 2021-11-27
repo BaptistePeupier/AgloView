@@ -1,0 +1,13 @@
+@import '../../scss/variables';
+
+.navbar {
+  background-color: $navbar-background-color;
+}
+
+.navbar .menu .btn {
+  font-size: 1.6rem;
+}
+
+.navbar a {
+  color: $navbar-link;
+}
