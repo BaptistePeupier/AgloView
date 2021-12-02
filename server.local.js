@@ -14,7 +14,10 @@ app.use(function(req, res, next) {
 
 // Routes
 // For User
-const {CreateUser, ReadUser, UpdateUser, DeleteUser} = require('./api/routes/User')
+const CreateUser = require('./api/routes/User/CreateUser');
+const ReadUser = require('./api/routes/User/ReadUser');
+const UpdateUser = require('./api/routes/User/UpdateUser');
+const DeleteUser = require('./api/routes/User/DeleteUser');
 app.post('/user', (req, res) => CreateUser(req, res));
 app.get('/user', (req, res) => ReadUser(req, res));
 app.put('/user', (req, res) => UpdateUser(req, res));
@@ -24,4 +27,3 @@ app.delete('/user', (req, res) => DeleteUser(req, res));
 app.listen(process.env.PORT || 8080)
 
 console.log("API is running at http://localhost:8080")
-

@@ -11,7 +11,7 @@ function sendError (res, reason) {
 }
 
 // To check a password:
-//      + a least 8 characters
+//      + at least 8 characters
 //      + contain at least:
 //          - one lowercase letter
 //          - one uppercase letter
