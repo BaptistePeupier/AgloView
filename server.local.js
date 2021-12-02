@@ -12,20 +12,16 @@ app.use(function(req, res, next) {
   next()
 })
 
-// add more endpoints by copying this pattern
-app.use(require('./api/routes/email'))
-require('./api/routes/email')
-
-app.use(require('./api/routes/list'))
-require('./api/routes/list')
-
-app.use(require('./api/routes/login'))
-require('./api/routes/login')
-
-app.use(require('./api/routes/register'))
-require('./api/routes/register')
+// Routes
+// For User
+const {CreateUser, ReadUser, UpdateUser, DeleteUser} = require('./api/routes/User')
+app.post('/user', (req, res) => CreateUser(req, res));
+app.get('/user', (req, res) => ReadUser(req, res));
+app.put('/user', (req, res) => UpdateUser(req, res));
+app.delete('/user', (req, res) => DeleteUser(req, res));
 
 // Start the api on port 8080
 app.listen(process.env.PORT || 8080)
 
 console.log("API is running at http://localhost:8080")
+
