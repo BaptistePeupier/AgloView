@@ -5,7 +5,7 @@ const fs = require ('fs');
 function createSessionJWT(payload) {
     // ci-dessous, on met en place le cookie de session JWT :
     // 1/ on recupere notre clef privee
-    const RSA_PRIVATE_KEY = fs.readFileSync('./api/routes/Outils/keys/jwtRS256.key');
+    const RSA_PRIVATE_KEY = fs.readFileSync(__dirname + '/keys/jwtRS256.key');
 
 
     // 2/ on signe un token JWT. Le payload est l'identifiant de
@@ -70,7 +70,7 @@ function decodeSessionCookie(req) {
     const sessionid = req.cookies.SESSIONID;
 
     // on lit la clef publique
-    const RSA_PUBLIC_KEY = fs.readFileSync('./api/routes/Outils/keys/jwtRS256.key.pub');
+    const RSA_PUBLIC_KEY = fs.readFileSync(__dirname + '/keys/jwtRS256.key.pub');
 
     // on récupère les données du cookie
     try {
