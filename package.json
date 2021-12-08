@@ -1,5 +1,5 @@
 {
-  "name": "woapp",
+  "name": "agloview",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -14,11 +14,12 @@
     "heroku-postbuild": "ng build --configuration production"
   },
   "engines": {
-    "node": "10.15.0",
-    "npm": "6.4.1"
+    "node": "17.2.0",
+    "npm": "8.1.4"
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^13.0.4",
     "@angular/animations": "8.2.13",
     "@angular/cli": "^13.0.4",
     "@angular/common": "8.2.13",
@@ -60,7 +61,6 @@
     "zone.js": "0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^13.0.4",
     "@angular/language-service": "8.2.13",
     "@types/jasmine": "3.3.8",
     "@types/jasminewd2": "2.0.3",
@@ -75,7 +75,7 @@
     "karma-jasmine": "2.0.1",
     "karma-jasmine-html-reporter": "1.4.0",
     "mongodb": "^4.2.1",
-    "protractor": "^5.4.4",
+    "protractor": "^7.0.0",
     "ts-node": "7.0.0",
     "tslint": "5.15.0"
   }
