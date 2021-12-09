@@ -1,7 +1,7 @@
 const {sendMessage, sendError} = require('../../Outils/helper');
 const auth = require('../../Outils/auth');
-const {client} = require("../../Outils/configBDD");
 const pbkdf2 = require("pbkdf2/lib/sync");
+const Users = require("../../Outils/Schema/User")
 
 // Parameters :
 //  + req, the data passed by the request with 2 fields in its body :
@@ -19,27 +19,21 @@ async function LoginUser (req, res) {
     (typeof req.body.email !== 'undefined') && (req.body.email !== null) &&
     (typeof req.body.password !== 'undefined') && (req.body.password !== null)
   ) {
-    await client.connect();
-    const userCollection = client.db("AgloView").collection("user");
 
     // Retrieve user's salt for password check
-    let salt = (await userCollection.findOne({email: req.body.email}));
+    let salt = (await Users.findOne({email: req.body.email}));
 
     if (salt !== null) {
-      salt = salt.salt
+      salt = salt.salt;
 
       passwordHash = pbkdf2(req.body.password, salt, 1000, 32, 'sha256').toString('hex');
-      let userLogged = await userCollection.findOne({
+      let userLogged = await Users.findOne({
         email: req.body.email,
         password: passwordHash,
         salt: salt
       });
 
-      client.close().then();
-
-      console.log(userLogged)
       if (userLogged !== null) {
-
         // Set user's session when login is checked & valid.
         auth.setSessionCookie(req, res, {
           userID: userLogged._id,
@@ -47,10 +41,12 @@ async function LoginUser (req, res) {
         });
 
         sendMessage(res, userLogged);
-      } else {
+      }
+      else {
         sendError(res, "Invalid Email or PSW");
       }
-    } else {
+    }
+    else {
       sendError(res, "Invalid Email or PSW");
     }
   } else {
