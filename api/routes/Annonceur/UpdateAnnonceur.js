@@ -28,6 +28,7 @@ async function UpdateAnnonceur(req, res) {
       }
 
       if (req.body.email !== null) {
+        // Check if an Annonceur doesn't use the passed email.
         const annonceurAlreadyExist = await Annoneurs.findOne({email: req.body.email}).where("_id").ne(getUserID(req));
         if (annonceurAlreadyExist !== null) {
           return sendError(res, "Can not update this annonceur with this email, a annonceur with same email already exists")
@@ -38,7 +39,6 @@ async function UpdateAnnonceur(req, res) {
       if (req.body.password !== null) {
         // Check if the password is strong enough.
         if (isValidPassword(req.body.password)) {
-          // Check if a annonceur doesn't use the passed email.
           // Construct Salt and Password Hash
           salt = crypto.randomBytes(32).toString('hex');
           req.body.password = pbkdf2(req.body.password, salt, 1000, 32, 'sha256').toString('hex');

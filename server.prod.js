@@ -38,10 +38,24 @@ app.post('/loginAnnonceur', (req, res) => LoginAnnonceur(req, res))
 
 app.get('/annonceurs', (req, res) => ReadAllAnnonceurs(req, res));
 
-
 // For Admin
+const CreateAdmin = require("./api/routes/Admin/CreateAdmin");
+const ReadAdmin = require('./api/routes/Admin/ReadAdmin');
+const UpdateAdmin = require('./api/routes/Admin/UpdateAdmin');
+const DeleteAdmin = require('./api/routes/Admin/DeleteAdmin');
 const LoginAdmin = require("./api/routes/Admin/LoginAdmin");
+const ReadAllAdmins = require('./api/routes/Admin/ReadAllAdmins');
+app.post('/admin', (req, res) => CreateAdmin(req, res));
+app.get('/admin', (req, res) => ReadAdmin(req, res));
+app.put('/admin', (req, res) => UpdateAdmin(req, res));
+app.delete('/admin', (req, res) => DeleteAdmin(req, res));
+
 app.post('/loginAdmin', (req, res) => LoginAdmin(req, res))
+
+app.get('/admins', (req, res) => ReadAllAdmins(req, res));
+
+// For Playlist
+
 
 //
 //
