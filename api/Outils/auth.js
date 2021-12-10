@@ -23,6 +23,20 @@ function getUserID(req) {
 }
 module.exports.getUserID = getUserID;
 
+function isLogged(req, res) {
+  if (getUserID(req) !== -1) {
+    // Refresh session cookie
+    setSessionCookie(req, res, getSession(req).userInfo);
+
+    return true;
+  }
+  else {
+    sendError(res, 'User not logged');
+    return false;
+  }
+}
+module.exports.isLogged = isLogged;
+
 // Check if the user is logged and then return true.
 // If not, inform that the user isn't logged
 function isUser (req, res) {
@@ -33,7 +47,7 @@ function isUser (req, res) {
       return true;
   }
   else {
-      sendError(res, 'User not logged');
+      sendError(res, 'Can not do this operation: user is not an user');
       return false;
   }
 }
