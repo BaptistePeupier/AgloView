@@ -1,6 +1,5 @@
 const {sendMessage, sendError} = require('../../Outils/helper');
 const auth = require('../../Outils/auth');
-const {client} = require("../../Outils/configBDD");
 const pbkdf2 = require("pbkdf2/lib/sync");
 const Admins = require("../../Outils/Schema/Admins")
 
@@ -33,9 +32,6 @@ async function LoginAdmin (req, res) {
         salt: salt
       });
 
-      client.close().then();
-
-      console.log(userLogged)
       if (userLogged !== null) {
 
         // Set user's session when login is checked & valid.

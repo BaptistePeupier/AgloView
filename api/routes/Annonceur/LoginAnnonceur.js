@@ -1,6 +1,5 @@
 const {sendMessage, sendError} = require('../../Outils/helper');
 const auth = require('../../Outils/auth');
-const {client} = require("../../Outils/configBDD");
 const pbkdf2 = require("pbkdf2/lib/sync");
 const Annonceurs = require("../../Outils/Schema/Annonceurs")
 
@@ -27,24 +26,20 @@ async function LoginAnnonceur (req, res) {
       salt = salt.salt;
 
       passwordHash = pbkdf2(req.body.password, salt, 1000, 32, 'sha256').toString('hex');
-      let userLogged = await Annonceurs.findOne({
+      let annonceurLogged = await Annonceurs.findOne({
         email: req.body.email,
         password: passwordHash,
         salt: salt
       });
 
-      client.close().then();
-
-      console.log(userLogged)
-      if (userLogged !== null) {
-
+      if (annonceurLogged !== null) {
         // Set user's session when login is checked & valid.
         auth.setSessionCookie(req, res, {
-          userID: userLogged._id,
+          userID: annonceurLogged._id,
           role: "annonceur"
         });
 
-        sendMessage(res, userLogged);
+        sendMessage(res, annonceurLogged);
       } else {
         sendError(res, "Invalid Email or PSW");
       }

@@ -1,9 +1,9 @@
-const Users = require("../../Outils/Schema/User")
+const Annonceurs = require("../../Outils/Schema/Annonceurs")
 const {sendMessage, sendError} = require("../../Outils/helper");
 const {getSession, getUserID} = require("../../Outils/auth");
 
 //
-async function ReadUser(req, res) {
+async function ReadAnnonceur(req, res) {
   // Check fields.
   if (
     (typeof req.body.email !== 'undefined') && (req.body.email !== null) &&
@@ -11,11 +11,11 @@ async function ReadUser(req, res) {
   ) {
     if (
       (getSession(req).userInfo.role === "admin") ||
-      ((getUserID(req) === req.body._id)) && (getSession(req).userInfo.role === "user")
+      ((getUserID(req) === req.body._id)) && (getSession(req).userInfo.role === "annonceur")
     ) {
-      Users.findOne({_id: req.body._id, email: req.body.email}, (err, resp) => {
+      Annonceurs.findOne({_id: req.body._id, email: req.body.email}, (err, resp) => {
           if(err) return sendError(res, err);
-          if(resp === null) return sendError(res, "User doesn't exist");
+          if(resp === null) return sendError(res, "Annonceur doesn't exist");
           else {
             resp.password = "";
             resp.salt = "";
@@ -24,11 +24,11 @@ async function ReadUser(req, res) {
         });
     }
     else {
-      sendError(res, "You don't have the right to view that user's account");
+      sendError(res, "You don't have the right to view that annonceur's account");
     }
   }
   else {
     sendError(res, "Missing required fields");
   }
 }
-module.exports = ReadUser;
+module.exports = ReadAnnonceur;
