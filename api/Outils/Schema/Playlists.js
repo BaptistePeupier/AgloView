@@ -4,6 +4,6 @@ const Schema = mongoose.Schema ;
 
 const SchemaPlaylist = Schema({
   nom: String,
-  playlists: [{ type: Schema.Types.ObjectId, ref: 'videos' }]
+  videos: [{ type: Schema.Types.ObjectId, ref: 'videos' }]
 });
 module.exports = database.model('playlists', SchemaPlaylist );

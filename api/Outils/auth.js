@@ -51,7 +51,7 @@ function isUser (req, res) {
       return false;
   }
 }
-module.exports.userLogged = isUser;
+module.exports.isUser = isUser;
 
 // Check if the user is and admin or not.
 // If not, inform that the user isn't an admin.
