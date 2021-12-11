@@ -66,6 +66,10 @@ app.get('/admins', (req, res) => ReadAllAdmins(req, res));
 
 // For Playlist
 
+// For Video
+const CreateVideo = require("./api/routes/Video/CreateVideo");
+app.get('/video', (req, res) => CreateVideo(req, res));
+
 // Start the api on port 8080
 app.listen(process.env.PORT || 8080)
 

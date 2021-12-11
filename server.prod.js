@@ -56,6 +56,9 @@ app.get('/admins', (req, res) => ReadAllAdmins(req, res));
 
 // For Playlist
 
+// For Video
+const CreateVideo = require("./api/routes/Video/CreateVideo");
+app.get('/video', (req, res) => CreateVideo(req, res));
 
 //
 //
