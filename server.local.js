@@ -65,6 +65,10 @@ app.post('/loginAdmin', (req, res) => LoginAdmin(req, res))
 app.get('/admins', (req, res) => ReadAllAdmins(req, res));
 
 // For Playlist
+const CreatePlaylist = require("./api/routes/Playlist/CreatePlaylist");
+const ReadPlaylist = require("./api/routes/Playlist/ReadPlaylist");
+app.post('/playlist', (req, res) => CreatePlaylist(req, res));
+app.get('/playlist', (req, res) => ReadPlaylist(req, res));
 
 // For Video
 const CreateVideo = require("./api/routes/Video/CreateVideo");
