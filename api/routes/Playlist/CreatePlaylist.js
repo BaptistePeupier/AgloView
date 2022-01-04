@@ -15,14 +15,10 @@ async function CreatePlaylist(req, res) {
       const user = await Users.findOne({_id: getUserID(req)});
       user.playlists.push(newPlaylistRegistered._id);
 
-      console.log(await Playlists.find({
-        _id: {$in: user.playlists}
-      }));
-
       Users.updateOne({_id: getUserID(req)},{playlists: user.playlists}, async (err, resp) => {
         if (err) return sendError(res, err);
-        delete user.password;
-        delete user.salt;
+        user.password = "";
+        user.salt = "";
         user.playlists = await Playlists.find({_id: {$in:user.playlists}});
         return sendMessage(res, user);
       })

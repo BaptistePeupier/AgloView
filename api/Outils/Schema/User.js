@@ -8,7 +8,7 @@ const SchemaUser = Schema({
   email: String,
   tags: [{
     tag: String,
-    rank: Number
+    occurrence: Number
   }],
   password: String,
   salt: String,

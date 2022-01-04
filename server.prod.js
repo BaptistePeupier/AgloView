@@ -38,6 +38,7 @@ app.post('/loginAnnonceur', (req, res) => LoginAnnonceur(req, res))
 
 app.get('/annonceurs', (req, res) => ReadAllAnnonceurs(req, res));
 
+
 // For Admin
 const CreateAdmin = require("./api/routes/Admin/CreateAdmin");
 const ReadAdmin = require('./api/routes/Admin/ReadAdmin');
@@ -55,6 +56,14 @@ app.post('/loginAdmin', (req, res) => LoginAdmin(req, res))
 app.get('/admins', (req, res) => ReadAllAdmins(req, res));
 
 // For Playlist
+const CreatePlaylist = require("./api/routes/Playlist/CreatePlaylist");
+const ReadPlaylist = require("./api/routes/Playlist/ReadPlaylist");
+const UpdatePlaylist = require("./api/routes/Playlist/UpdatePlaylist");
+const DeletePlaylist = require("./api/routes/Playlist/DeletePlaylist");
+app.post('/playlist', (req, res) => CreatePlaylist(req, res));
+app.get('/playlist', (req, res) => ReadPlaylist(req, res));
+app.put('/playlist', (req, res) => UpdatePlaylist(req, res));
+app.delete('/playlist', (req, res) => DeletePlaylist(req, res));
 
 // For Video
 const CreateVideo = require("./api/routes/Video/CreateVideo");
