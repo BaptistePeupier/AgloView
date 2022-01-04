@@ -67,7 +67,11 @@ app.delete('/playlist', (req, res) => DeletePlaylist(req, res));
 
 // For Video
 const CreateVideo = require("./api/routes/Video/CreateVideo");
-app.get('/video', (req, res) => CreateVideo(req, res));
+const ReadVideo = require("./api/routes/Video/ReadVideo");
+const DeleteVideo = require("./api/routes/Video/DeleteVideo");
+app.post('/video', (req, res) => CreateVideo(req, res));
+app.get('/video', (req, res) => ReadVideo(req, res));
+app.delete('/video', (req, res) => DeleteVideo(req, res));
 
 //
 //

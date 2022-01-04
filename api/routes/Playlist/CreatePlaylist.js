@@ -17,10 +17,7 @@ async function CreatePlaylist(req, res) {
 
       Users.updateOne({_id: getUserID(req)},{playlists: user.playlists}, async (err, resp) => {
         if (err) return sendError(res, err);
-        user.password = "";
-        user.salt = "";
-        user.playlists = await Playlists.find({_id: {$in:user.playlists}});
-        return sendMessage(res, user);
+        return sendMessage(res, {_id: newPlaylistRegistered._id});
       })
     }
     else {
@@ -29,3 +26,4 @@ async function CreatePlaylist(req, res) {
   }
 }
 module.exports = CreatePlaylist;
+

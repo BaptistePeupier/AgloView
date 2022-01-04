@@ -70,14 +70,17 @@ async function CreateVideo(req, res) {
             // save Users' tags
             Users.updateOne({_id: getUserID(req)}, {tags: currentUser.tags}, (err, resp) => {
               if(err) return sendError(res, err);
-            })
+            });
+
+
 
             sendMessage(res, {
-              video_id: searchQuery,
+              video_id: newVideo._id,
+              youtube_video_id: searchQuery,
               title: video.data.items[0].snippet.title,
               tags: video_tags,
               category: category
-            })
+            });
           }
           else {
             sendError(res, "User doesn't exists");
