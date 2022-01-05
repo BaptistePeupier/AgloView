@@ -87,13 +87,15 @@ const CreateAnnonce = require("./api/routes/Annonce/CreateAnnonce");
 const ReadAnnonce = require("./api/routes/Annonce/ReadAnnonce");
 const UpdateAnnonce = require("./api/routes/Annonce/UpdateAnnonce");
 const DeleteAnnonce = require("./api/routes/Annonce/DeleteAnnonce");
+const GetAnnonceForUser = require("./api/routes/Annonce/GetAnnonceForUser");
 app.post('/annonce', (req, res) => CreateAnnonce(req, res));
 app.get('/annonce', (req, res) => ReadAnnonce(req, res));
 app.put('/annonce', (req, res) => UpdateAnnonce(req, res));
 app.delete('/annonce', (req, res) => DeleteAnnonce(req, res));
 
+app.get('/getAnnonceForUser', (req, res) => GetAnnonceForUser(req, res));
+
 // Start the api on port 8080
 app.listen(process.env.PORT || 8080)
 
 console.log("API is running at http://localhost:8080")
-
