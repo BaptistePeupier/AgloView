@@ -6,7 +6,10 @@ const SchemaUser = Schema({
   pseudo: String,
   age: Number,
   email: String,
-  tags: [String],
+  tags: [{
+    tag: String,
+    occurrence: Number
+  }],
   password: String,
   salt: String,
   playlists: [{ type: Schema.Types.ObjectId, ref: 'playlists' }]
