@@ -40,7 +40,17 @@ async function LoginUser (req, res) {
           role: "user"
         });
 
-        sendMessage(res, userLogged);
+        const userLoggedDatas = {
+          _id: userLogged._id,
+          role: "user",
+          pseudo: userLogged.pseudo,
+          age: userLogged.age,
+          email: userLogged.email,
+          playlists: userLogged.playlists,
+          tags: userLogged.tags
+        }
+
+        sendMessage(res, userLoggedDatas);
       }
       else {
         sendError(res, "Invalid Email or PSW");

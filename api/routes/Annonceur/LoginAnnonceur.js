@@ -39,7 +39,15 @@ async function LoginAnnonceur (req, res) {
           role: "annonceur"
         });
 
-        sendMessage(res, annonceurLogged);
+        const annonceurLoggedDatas = {
+          _id: annonceurLogged._id,
+          role: "annonceur",
+          pseudo: annonceurLogged.pseudo,
+          email: annonceurLogged.email,
+          annonces: annonceurLogged.annonces
+        }
+
+        sendMessage(res, annonceurLoggedDatas);
       } else {
         sendError(res, "Invalid Email or PSW");
       }
