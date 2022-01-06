@@ -20,10 +20,14 @@ async function DeleteVideo(req, res) {
         // Check if the video is in one of the user's playlists
         let i = 0;
         let videoFound = false;
+        let videosPlaylist;
         while ((!videoFound) && (i < currentUser.playlists.length)) {
           let j = 0;
           while ((!videoFound) && (j < currentUser.playlists[i].videos.length)) {
-            if (currentUser.playlists[i].videos[j]._id.toString() === req.body.video_id) videoFound = true;
+            if (currentUser.playlists[i].videos[j]._id.toString() === req.body.video_id) {
+              videosPlaylist = currentUser.playlists[i];
+              videoFound = true;
+            }
             j++;
           }
           i++;
@@ -31,9 +35,16 @@ async function DeleteVideo(req, res) {
 
         if (videoFound) {
           if ((typeof req.body.video_id !== "undefined") && (req.body.video_id !== null)) {
-            Videos.deleteOne({_id: req.body.video_id}, (err, resp) => {
+            // Remove from Playlist
+            videosPlaylist.videos = videosPlaylist.videos.filter(video => video._id.toString() !== req.body.video_id)
+            Playlists.updateOne({_id: videosPlaylist._id}, {videos: videosPlaylist.videos}, (err, resp) => {
               if (err) return sendError(res, err);
-              return sendMessage(res, resp);
+
+              // Delete Video
+              Videos.deleteOne({_id: req.body.video_id}, (err, resp) => {
+                if (err) return sendError(res, err);
+                return sendMessage(res, resp);
+              });
             });
           }
         }
@@ -51,3 +62,4 @@ async function DeleteVideo(req, res) {
   }
 }
 module.exports = DeleteVideo;
+

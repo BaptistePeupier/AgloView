@@ -50,6 +50,7 @@ async function CreateVideo(req, res) {
             let wordsTags;
             for (let i = 0 ; i < video_tags.length ; i++) {
               wordsTags = video_tags[i].split(/(?<=^\S+)\s/);
+              wordsTags = wordsTags.map(tag => tag.toLowerCase());  // Lowercase tag to facilitate search with annonce's tag.
 
               for (let j = 0 ; j < wordsTags.length ; j++) {
                 // check if tag exists: if already in user's lists, update occurrences of it.
@@ -100,4 +101,3 @@ async function CreateVideo(req, res) {
   }
 }
 module.exports = CreateVideo;
-

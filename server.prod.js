@@ -73,6 +73,19 @@ app.post('/video', (req, res) => CreateVideo(req, res));
 app.get('/video', (req, res) => ReadVideo(req, res));
 app.delete('/video', (req, res) => DeleteVideo(req, res));
 
+// For Annonce
+const CreateAnnonce = require("./api/routes/Annonce/CreateAnnonce");
+const ReadAnnonce = require("./api/routes/Annonce/ReadAnnonce");
+const UpdateAnnonce = require("./api/routes/Annonce/UpdateAnnonce");
+const DeleteAnnonce = require("./api/routes/Annonce/DeleteAnnonce");
+const GetAnnonceForUser = require("./api/routes/Annonce/GetAnnonceForUser");
+app.post('/annonce', (req, res) => CreateAnnonce(req, res));
+app.get('/annonce', (req, res) => ReadAnnonce(req, res));
+app.put('/annonce', (req, res) => UpdateAnnonce(req, res));
+app.delete('/annonce', (req, res) => DeleteAnnonce(req, res));
+
+app.get('/getAnnonceForUser', (req, res) => GetAnnonceForUser(req, res));
+
 //
 //
 app.get('/*all', function(req, res) {
