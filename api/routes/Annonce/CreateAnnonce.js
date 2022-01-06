@@ -11,7 +11,8 @@ async function CreateAnnonce(req, res) {
       (typeof req.body.tags !== 'undefined') && (req.body.tags instanceof Array)
     ) {
       // Create the Annonce
-      const newAnnonce = new Annonces({text: req.body.text, tags: req.body.tags, nb_vues: 0, tmp_moyen_vue: 0});
+      req.body.tags = req.body.tags.map(tag => tag.toLowerCase());  // Lowercase tag to facilitate search with user's tag.
+      const newAnnonce = new Annonces({text: req.body.text, tags: req.body.tags, nb_vues: 0, total_tmp_vue: []});
       const newAnnonceRegistered = await newAnnonce.save();
 
       // Add it to the Annonceur
@@ -29,3 +30,4 @@ async function CreateAnnonce(req, res) {
   }
 }
 module.exports = CreateAnnonce;
+

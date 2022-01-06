@@ -15,8 +15,6 @@ async function ReadAnnonce(req, res) {
         const annonce = await Annonces.findOne({_id: req.body.annonce_id});
 
         if (annonce !== null) {
-          // Update the number of time the Annonce has been viewed
-          annonce.nb_vues++;
           Annonces.updateOne({_id: req.body.annonce_id}, {nb_vues: annonce.nb_vues}, (err, resp) => {
             if (err) return sendError(res, err);
             return sendMessage(res, annonce);

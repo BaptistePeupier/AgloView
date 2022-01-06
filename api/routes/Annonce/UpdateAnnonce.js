@@ -9,7 +9,8 @@ async function UpdateAnnonce(req, res) {
     if (
       (typeof req.body.annonce_id !== 'undefined') && (req.body.annonce_id !== null) &&
       (typeof req.body.text !== 'undefined') && (req.body.text !== null) &&
-      (typeof req.body.tags !== 'undefined') && (req.body.tags instanceof Array)
+      (typeof req.body.tags !== 'undefined') && (req.body.tags instanceof Array) &&
+      (typeof req.body.tmp_vue !== 'undefined') && (req.body.tmp_vue !== null)
     ) {
       // Check if the Annonceur own the Annonce
       const annonceur = await Annonceurs.findOne({_id: getUserID(req)});
@@ -22,6 +23,8 @@ async function UpdateAnnonce(req, res) {
           // Update the Annonce
           annonce.text = req.body.text;
           annonce.tags = req.body.tags;
+          annonce.total_tmp_vue.push(req.body.tmp_vue);
+
           Annonces.updateOne({_id: req.body.annonce_id}, annonce, (err, resp) => {
             if (err) return sendError(res, err);
             return sendMessage(res, annonce);
@@ -41,3 +44,4 @@ async function UpdateAnnonce(req, res) {
   }
 }
 module.exports = UpdateAnnonce;
+
