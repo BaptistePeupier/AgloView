@@ -8,7 +8,8 @@ app.use(cookieParser());
 
 // allow CORS when running locally
 app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:4200')
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
   next()
@@ -98,4 +99,4 @@ app.get('/getAnnonceForUser', (req, res) => GetAnnonceForUser(req, res));
 // Start the api on port 8080
 app.listen(process.env.PORT || 8080)
 
-console.log("API is running at http://localhost:8080")
+console.log("API is running at http://127.0.0.1:8080")

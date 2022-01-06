@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
-import { ApiService } from '../api.service'
-import { AuthService } from '../auth.service'
-
-import { RegisterResponse } from '../types/registerresponse'
-import { LoginResponse } from '../types/loginresponse'
+import {AuthenticationService} from "../authentication.service";
 
 @Component({
   selector: 'app-login',
@@ -13,84 +9,63 @@ import { LoginResponse } from '../types/loginresponse'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  email = "";
+  password = "";
+  isUser = true;
+  isAnnonceur = false;
+  isAdmin = false;
 
-  model: any = {}
-  loginAlert: boolean = false
-  registerGenericAlert: boolean = false
-  registerPasswordAlert: boolean = false
-  showLogin: boolean = true
+  // @ViewChild('errorMessageComponent') errorMessage;
 
-  constructor(
-    private apiService: ApiService,
-    private authService: AuthService,
-    private formBuilder: FormBuilder
-  ) { }
-
-  ngOnInit() { }
-
-  switchDisplay() {
-    this.model = {}
-    this.loginAlert = false
-    this.registerGenericAlert = false
-    this.registerPasswordAlert = false
-    this.showLogin = !this.showLogin
+  constructor(private route: ActivatedRoute,
+              private auth : AuthenticationService,
+              private router: Router) {
   }
 
-  forgotPassword() {
-    window.location.href = "./forgotpassword"
+  ngOnInit(): void {
   }
 
-  resetAlerts() {
-    this.loginAlert = false
-    this.registerGenericAlert = false
-    this.registerPasswordAlert = false
+  // Launch the connexion process on the backend with the AuthenticationService for a User
+  // If it success, then we go to the home page of the User.
+  // If not, an error specified form the backend is displayed.
+  // It need:
+  //  + email
+  //  + password
+  connection() {
+    let role;
+
+    if (this.isUser) role = "User";
+    if (this.isAnnonceur) role = "Annonceur";
+    if (this.isAdmin) role = "Admin";
+
+    this.auth.sendAuthentication(this.email, this.password, role).subscribe(
+      res=> {
+        // Once we have received response from the backend, we launch the finalization of the authentication process in
+        // order to store the status of the user.
+        this.auth.finalizeAuthentication(res);
+
+        if (res.status === 'error') {
+          // this.errorMessage.sendError(res.data.reason);
+        }
+        else {
+          this.router.navigateByUrl('/' + role + 'Homepage').then();
+        }
+      }
+    )
   }
 
-  onSubmitRegisterForm() {
-    this.resetAlerts()
-
-    if (this.model.password !== this.model.password2) {
-      this.registerPasswordAlert = true
-    } else if (this.model.email) {
-      this.apiService
-        .postRegister(this.model)
-        .then((response: RegisterResponse) => {
-          this.onSubmitLoginForm()
-        }).catch((error) => {
-          this.registerGenericAlert = true
-        })
-    } else {
-      this.registerGenericAlert = true
+  setRole(role: string) {
+    if (role ==="user") {
+      this.isUser = true;
+      this.isAdmin = this.isAnnonceur = false;
+    }
+    if (role ==="annonceur") {
+      this.isAnnonceur = true;
+      this.isAdmin = this.isUser = false;
+    }
+    if (role ==="admin") {
+      this.isAdmin = true;
+      this.isUser = this.isAnnonceur = false;
     }
   }
-
-  onSubmitLoginForm() {
-    this.resetAlerts()
-
-    if (this.model.email && this.model.password) {
-      this.apiService
-        .postLogin(this.model)
-        .then((response: LoginResponse) => {
-          if (response.success && response.token) {
-            this.authService.setToken(response.token)
-            window.location.href = "./homepage"
-          } else {
-            this.loginAlert = true
-          }
-        }).catch((error) => {
-          this.loginAlert = true
-        });
-    } else {
-      this.loginAlert = true
-    }
-  }
-
-  // Observable
-  // this.apiService.postLogin().subscribe((response:LoginResponse) => {
-  //   do something with 'response'
-  // },
-  // err => {
-  //   console.log(err)
-  // })
-
 }

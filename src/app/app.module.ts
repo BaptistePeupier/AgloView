@@ -1,37 +1,42 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './api.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { LoginComponent } from './login/login.component';
 import { EmailValidatorDirective } from './directives/email-validator.directive';
 import { PasswordValidatorDirective } from './directives/password-validator.directive';
-import { HeaderBarComponent } from './header-bar/header-bar.component';
+import { LoginComponent } from './login/login.component';
+
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent,
-    LoginComponent,
     EmailValidatorDirective,
     PasswordValidatorDirective,
-    HeaderBarComponent
+    LoginComponent
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
-  providers: [ApiService], // add your services here
   bootstrap: [AppComponent]
 })
 export class AppModule { }

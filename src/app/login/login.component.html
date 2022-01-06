@@ -1,38 +1,38 @@
-<div class="login-page">
+<mat-card>
+  <mat-card-title>
+    <h1>AgloView</h1>
+    <h3 *ngIf="isUser">Page de connexion pour les utilisateurs</h3>
+    <h3 *ngIf="isAnnonceur">Page de connexion pour les annonceurs</h3>
+    <h3 *ngIf="isAdmin">Page de connexion pour les administrateur</h3>
+  </mat-card-title>
 
-  <!-- Registration Form --->
-  <div class="form">
-    <form *ngIf="!showLogin" class="register-form" name="registerForm" #form="ngForm" (ngSubmit)="onSubmitRegisterForm()">
-      <h4>Create Account</h4>
-
-      <div *ngIf="registerGenericAlert" class="alert alert-danger" role="alert">
-        <strong>Error</strong> There was a problem creating your account.
-      </div>
-      <div *ngIf="registerPasswordAlert" class="alert alert-danger" role="alert">
-        <strong>Error</strong> Your passwords did not match.
-      </div>
-
-      <input type="text" name="email" [(ngModel)]="model.email" #email="ngModel" placeholder="email@company.com" require emailValidator/>
-      <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="password" require passwordValidator/>
-      <input type="password" name="password2" [(ngModel)]="model.password2" #password2="ngModel" placeholder="confirm password" require passwordValidator/>
-      <button type="submit" [disabled]="!form.form.valid">register</button>
-      <p class="message">Already registered? <span class="btn-link" (click)="switchDisplay()">Sign In</span></p>
-    </form>
-
+  <mat-card-content>
     <!-- Login Form -->
-    <form *ngIf="showLogin" class="login-form" name="loginForm" #form="ngForm" (ngSubmit)="onSubmitLoginForm()">
-      <h4>Login</h4>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="email" type="text" (keyup.enter)="connection()" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="password" type="password" (keyup.enter)="connection()" required>
+    </mat-form-field>
 
-      <div *ngIf="loginAlert" class="alert alert-danger" role="alert">
-        <strong>Error</strong> Your email and password were incorrect.
-      </div>
+    <br>
+    <button mat-raised-button color="primary" (click)="connection()">Connect</button>
 
-      <input type="text" name="email" [(ngModel)]="model.email" #email="ngModel" placeholder="email@company.com" require emailValidator/>
-      <input type="password" name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="password" require/>
-      <button type="submit" [disabled]="!form.form.valid">login</button>
-      <p class="message">Not registered? <span class="btn-link" (click)="switchDisplay()">Create an account</span></p>
-      <p class="message"><span class="btn-link" (click)="forgotPassword()">Forgot Password</span></p>
-    </form>
+<!--    <app-error-message #errorMessageComponent></app-error-message>-->
+  </mat-card-content>
 
-  </div>
-</div>
+  <mat-card-footer id="formFooter">
+    <!--    Password forgotten launch treatment-->
+    <a class="underlineHover" routerLink="/recoverPassword">Password Forgotten?</a>
+    <br>
+    <span>Cliquez ici si vous êtes un </span>
+    <a *ngIf="!isUser" class="underlineHover" (click)="setRole('user')">utilisateur</a>
+    <span *ngIf="isAdmin"> / </span>
+    <a *ngIf="!isAnnonceur" class="underlineHover" (click)="setRole('annonceur')">annonceur</a>
+    <span *ngIf="!isAdmin"> / </span>
+    <a *ngIf="!isAdmin" class="underlineHover" (click)="setRole('admin')">administrateur</a>
+  </mat-card-footer>
+</mat-card>
