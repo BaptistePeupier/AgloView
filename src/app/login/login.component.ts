@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   isAnnonceur = false;
   isAdmin = false;
 
-  // @ViewChild('errorMessageComponent') errorMessage;
+  @ViewChild('errorMessageComponent') errorMessage;
 
   constructor(private route: ActivatedRoute,
               private auth : AuthenticationService,
@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
         this.auth.finalizeAuthentication(res);
 
         if (res.status === 'error') {
-          // this.errorMessage.sendError(res.data.reason);
+          this.errorMessage.sendError(res.data.reason);
         }
         else {
-          this.router.navigateByUrl('/' + role + 'Homepage').then();
+          this.router.navigateByUrl('/' + role + 'Home').then();
         }
       }
     )
