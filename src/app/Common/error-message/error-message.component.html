@@ -1,0 +1,4 @@
+<mat-card *ngIf="errorMessageBool == false" class="alert" >
+  <mat-label>{{errorMessage}}</mat-label>
+  <mat-icon class="closebtn" (click)="errorMessageBool = true">close</mat-icon>
+</mat-card>
