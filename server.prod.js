@@ -86,6 +86,9 @@ app.delete('/annonce', (req, res) => DeleteAnnonce(req, res));
 
 app.get('/getAnnonceForUser', (req, res) => GetAnnonceForUser(req, res));
 
+const Logout = require("./api/Outils/Logout");
+app.post('/logout', (req, res) => Logout(req, res));
+
 //
 //
 app.get('/*all', function(req, res) {

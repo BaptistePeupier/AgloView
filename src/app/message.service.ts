@@ -31,10 +31,9 @@ export class MessageService {
 
   // Method that send a GET (Read) to the backend using the route and data passed.
   Read (url: string, data: any): Observable<ResponseData> {
-    return this.http.request<ResponseData>(
-      "GET",
+    return this.http.get<ResponseData>(
       environment.apiHost + url,
-      {body: data, withCredentials: true}
+      {params: data, withCredentials: true}
     );
   }
 
@@ -50,7 +49,7 @@ export class MessageService {
   // Method that send a DELETE (Delete) to the backend using the route and data passed.
   Delete (url: string, data: any): Observable<ResponseData> {
     return this.http.request<ResponseData>(
-      "GET",
+      "DELETE",
       environment.apiHost + url,
       {body: data, withCredentials: true}
     );
