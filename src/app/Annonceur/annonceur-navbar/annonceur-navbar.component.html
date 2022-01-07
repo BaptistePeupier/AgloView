@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="displayNavBar == true">
+  <a class="navbar-brand" routerLink="/AnnonceurHome">
+    <mat-icon>home</mat-icon>
+    <span>AgloView Annonceur</span>
+  </a>
+
+  <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a id="AnnonceurHome" class="nav-link active" routerLink="/AnnonceurHome">Annonces</a>
+      </li>
+      <li class="nav-item">
+        <a id="AnnonceurStatistics" class="nav-link" routerLink="/AnnonceurStatistics">statistics</a>
+      </li>
+    </ul>
+
+    <div class="d-flex flex-row-reverse" id="Profile">
+      <div [matMenuTriggerFor]="accountMenu">
+        <mat-icon id="ProfileIcon">account_circle</mat-icon>
+        <span id="ProfileName">{{auth.getUserName()}}</span>
+      </div>
+
+      <mat-menu #accountMenu="matMenu">
+        <button mat-menu-item routerLink="/AnnonceurAccount">
+          <mat-icon>person_outline</mat-icon>
+          <span>Account</span>
+        </button>
+        <button mat-menu-item (click)="auth.logout()">
+          <mat-icon>backspace</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</nav>

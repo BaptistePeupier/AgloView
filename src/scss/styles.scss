@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$themeColor: #3f51b5;
+
+$ghostWhite: #f4f4f8;
+$darkAqua: #3f51b5;
 
 body {
   background-color: #F5F6FB;
@@ -8,3 +12,81 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+button {
+  border: none;
+}
+
+// Cells in tables that are meant to launch a popup
+.popupCell {
+  cursor: pointer;
+}
+.popupCell:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+.centeredCell {
+  text-align: center;
+}
+
+// Icons in table rows
+.rowIcon {
+  cursor: pointer;
+
+  &:hover {
+    color: $themeColor;
+  }
+
+  &:active {
+    color: red;
+  }
+}
+
+// Button Footer
+.ButtonFooter {
+  text-align: center;
+
+  .mat-raised-button {
+    margin: 10px;
+  }
+}
+
+// Group of fields in popups
+.popupGroupField {
+  margin-bottom: 10px;
+
+  mat-card-title {
+    color: $themeColor;
+  }
+}
+
+// Consecutive fields in a form
+.consecutiveFields {
+  margin-right: 10px;
+}
+
+.InputTitle {
+  text-align: center;
+}
+
+.AreaInput {
+  width: 100%;
+}
+
+// Buttons used to add entries to tables
+.addButton {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.tableTitle {
+  text-align: center;
+  color: $themeColor;
+}
+
+.matTableContainer {
+  position: relative;
+  max-height: 550px;
+  overflow: auto;
+  background-color: white;
+}

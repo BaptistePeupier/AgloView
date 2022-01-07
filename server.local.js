@@ -96,6 +96,9 @@ app.delete('/annonce', (req, res) => DeleteAnnonce(req, res));
 
 app.get('/getAnnonceForUser', (req, res) => GetAnnonceForUser(req, res));
 
+const Logout = require("./api/Outils/Logout");
+app.post('/logout', (req, res) => Logout(req, res));
+
 // Start the api on port 8080
 app.listen(process.env.PORT || 8080)
 

@@ -46,6 +46,7 @@ export class AuthenticationService {
       this.authenticated = true;
       this.userID = message.data._id;
       this.role = message.data.role;
+      this.userName = message.data.pseudo;
     }
   }
 
