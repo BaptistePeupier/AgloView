@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <p>Delete this {{objectToDelete.type}} ?</p>
+
+  <div id="deleteButtonContainer">
+    <div class="deleteButton">
+      <button mat-button color="accent" (click)="onNoClick()">No</button>
+    </div>
+
+    <div class="deleteButton">
+      <button mat-button color="primary" (click)="Delete()">Yes</button>
+    </div>
+  </div>
+
+  <app-error-message #errorMessageComponent></app-error-message>
+</mat-dialog-content>

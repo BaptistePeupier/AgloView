@@ -14,6 +14,7 @@ export class AuthenticationService {
 
   private userID: number;             // We store the id_user in order to perform filtering or action based on witch user is logged.
   private userName: string;           // We store the name of the user (principally to display it in the navbar).
+  private email: string;
 
   constructor(private msg: MessageService,
               private router: Router) {
@@ -47,6 +48,7 @@ export class AuthenticationService {
       this.userID = message.data._id;
       this.role = message.data.role;
       this.userName = message.data.pseudo;
+      this.email = message.data.email;
     }
   }
 
@@ -68,7 +70,7 @@ export class AuthenticationService {
   }
 
   // userID's getter
-  getUserID() {
+  getId() {
     return this.userID;
   }
 
@@ -91,4 +93,7 @@ export class AuthenticationService {
     this.router.navigateByUrl('').then();
   }
 
+  getEmail() {
+    return this.email;
+  }
 }

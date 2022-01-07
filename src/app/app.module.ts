@@ -21,6 +21,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatChipsModule} from '@angular/material/chips';
+import { AnnoncePopupComponent } from './Annonceur/annonce-popup/annonce-popup.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeletePopupComponent } from './Common/delete-popup/delete-popup.component';
+import { AnnonceurStatistiqueComponent } from './Annonceur/annonceur-statistique/annonceur-statistique.component';
+import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonceur-account.component';
 
 @NgModule({
   declarations: [
@@ -31,24 +37,30 @@ import {MatMenuModule} from '@angular/material/menu';
     UserHomeComponent,
     ErrorMessageComponent,
     AnnonceurHomeComponent,
-    AnnonceurNavbarComponent
+    AnnonceurNavbarComponent,
+    AnnoncePopupComponent,
+    DeletePopupComponent,
+    AnnonceurStatistiqueComponent,
+    AnnonceurAccountComponent
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule
-  ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatChipsModule,
+        MatDialogModule
+    ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

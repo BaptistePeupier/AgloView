@@ -1,0 +1,26 @@
+.Annonce {
+  margin: 10px;
+}
+
+.ButtonDiv{
+  text-align: center;
+}
+
+.mat-raised-button{
+  margin: 10px;
+}
+
+#UpdateAnnonceIcon {
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}
+
+#DeleteAnnonceIcon {
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+  display:block;
+}

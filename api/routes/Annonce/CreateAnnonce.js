@@ -7,12 +7,13 @@ async function CreateAnnonce(req, res) {
   if (isAnnonceur(req, res)) {
     // Check fields.
     if (
+      (typeof req.body.title !== 'undefined') && (req.body.title !== null) &&
       (typeof req.body.text !== 'undefined') && (req.body.text !== null) &&
       (typeof req.body.tags !== 'undefined') && (req.body.tags instanceof Array)
     ) {
       // Create the Annonce
       req.body.tags = req.body.tags.map(tag => tag.toLowerCase());  // Lowercase tag to facilitate search with user's tag.
-      const newAnnonce = new Annonces({text: req.body.text, tags: req.body.tags, nb_vues: 0, total_tmp_vue: []});
+      const newAnnonce = new Annonces({title: req.body.title, text: req.body.text, tags: req.body.tags, nb_vues: 0, total_tmp_vue: []});
       const newAnnonceRegistered = await newAnnonce.save();
 
       // Add it to the Annonceur

@@ -1,0 +1,9 @@
+#deleteButtonContainer {
+  display: flex;
+  flex-direction: row
+}
+
+.deleteButton {
+  flex: 1;
+  text-align: center
+}

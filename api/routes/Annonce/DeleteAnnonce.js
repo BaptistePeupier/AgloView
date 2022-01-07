@@ -5,23 +5,22 @@ const {sendError, sendMessage} = require("../../Outils/helper");
 
 async function DeleteAnnonce(req, res) {
   if (isAnnonceur(req, res)){
-    if ((typeof req.body.annonce_id !== 'undefined') && (req.body.annonce_id !== null)) {
-
+    if ((typeof req.body._id !== 'undefined') && (req.body._id !== null)) {
       // Check if the Annonceur own the Annonce
       const annonceur = await Annonceurs.findOne({_id: getUserID(req)});
-      const annonce = annonceur.annonces.filter(annonce => annonce._id.toString() === req.body.annonce_id)[0];
+      const annonce = annonceur.annonces.filter(annonce => annonce._id.toString() === req.body._id)[0];
 
       if (typeof annonce !== 'undefined') {
-        const annonce = await Annonces.findOne({_id: req.body.annonce_id});
+        const annonce = await Annonces.findOne({_id: req.body._id});
 
         if (annonce !== null) {
           // Remove Annonce from its Annonceur.
-          annonceur.annonces = annonceur.annonces.filter(annonce => annonce._id.toString() !== req.body.annonce_id);
+          annonceur.annonces = annonceur.annonces.filter(annonce => annonce._id.toString() !== req.body._id);
           const deletedAnnonce = await Annonceurs.updateOne({_id: getUserID(req)}, {annonces: annonceur.annonces})
 
           if (deletedAnnonce.acknowledged) {
             // Delete the Annonce
-            Annonces.deleteOne({_id: req.body.annonce_id}, (err, resp) => {
+            Annonces.deleteOne({_id: req.body._id}, (err, resp) => {
               if (err) return sendError(res, err);
               return sendMessage(res, resp);
             });
