@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/' + role + 'Home').then();
         }
       }
-    )
+    );
   }
 
   setRole(role: string) {

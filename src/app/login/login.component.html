@@ -34,5 +34,9 @@
     <a *ngIf="!isAnnonceur" class="underlineHover" (click)="setRole('annonceur')">annonceur</a>
     <span *ngIf="!isAdmin"> / </span>
     <a *ngIf="!isAdmin" class="underlineHover" (click)="setRole('admin')">administrateur</a>
+
+    <br>
+
+    <a class="underlineHover" routerLink="/CreateAccount">Pas encore inscrit ? Créez un compte !</a>
   </mat-card-footer>
 </mat-card>

@@ -1,0 +1,63 @@
+<mat-card>
+  <mat-card-title>
+    <h1>AgloView</h1>
+    <h3 *ngIf="type === 'user'">Créer un compte utilisateur</h3>
+    <h3 *ngIf="type === 'annonceur'">Créer un compte annonceur</h3>
+  </mat-card-title>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Pseudo</mat-label>
+    <input matInput [(ngModel)]="pseudo" type="text" required>
+  </mat-form-field>
+
+  <br>
+
+  <mat-card-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Type de compte</mat-label>
+      <mat-select [(ngModel)]="type">
+        <mat-option value="user">Utilisateur</mat-option>
+        <mat-option value="annonceur">Annonceur</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="email" type="text" required emailValidator>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field *ngIf="type === 'user'" appearance="fill">
+      <mat-label>Age</mat-label>
+      <input matInput [(ngModel)]="age" type="number" required>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput [(ngModel)]="password1" type="password" required passwordValidator
+             matTooltip="Doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 nombre, 1 caractère spécial (? ! . * ' ')"
+             [matTooltipPosition]="'right'">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Repeat Password</mat-label>
+      <input matInput [(ngModel)]="password2" type="password" required passwordValidator>
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="primary" (click)="CreateAcount()">Connect</button>
+
+    <app-error-message #errorMessageComponent></app-error-message>
+  </mat-card-content>
+
+  <mat-card-footer id="formFooter">
+
+  </mat-card-footer>
+</mat-card>

@@ -30,6 +30,8 @@ import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonce
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { ResetPasswordComponent } from './Common/reset-password/reset-password.component';
 import { AnnonceurPasswordComponent } from './Annonceur/annonceur-account/annonceur-password/annonceur-password.component';
+import { CreateAccountComponent } from './login/create-account/create-account.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { AnnonceurPasswordComponent } from './Annonceur/annonceur-account/annonc
     AnnonceurStatistiqueComponent,
     AnnonceurAccountComponent,
     ResetPasswordComponent,
-    AnnonceurPasswordComponent
+    AnnonceurPasswordComponent,
+    CreateAccountComponent
   ],
     imports: [
         FormsModule,
@@ -65,7 +68,8 @@ import { AnnonceurPasswordComponent } from './Annonceur/annonceur-account/annonc
         MatMenuModule,
         MatChipsModule,
         MatDialogModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSelectModule
     ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
