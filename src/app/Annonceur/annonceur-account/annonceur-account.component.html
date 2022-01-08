@@ -1,1 +1,36 @@
-<p>annonceur-account works!</p>
+<mat-card class="popupGroupField">
+  <mat-card-title>
+    <mat-card-title>Your data</mat-card-title>
+  </mat-card-title>
+
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Pseudo</mat-label>
+      <input matInput type="text" [(ngModel)]="currentAnnonceur.pseudo" (change)="modified = true" required>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" [(ngModel)]="currentAnnonceur.email" (change)="modified = true" required>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-footer class="ButtonFooter">
+    <button mat-raised-button routerLink="/AnnonceurPassword">Change password</button>
+    <br>
+
+    <button mat-raised-button color="warn" (click)="deleteAccount()">Delete account</button>
+    <br>
+
+    <button mat-raised-button color="primary" [disabled]="!modified" (click)="submitUserModifications()">
+      <span matTooltip="Activates if there are some modifications"
+            [matTooltipPosition]="'below'"
+            [matTooltipDisabled]="modified">
+              Save modifications
+      </span>
+    </button>
+
+    <app-error-message #errorMessageComponent></app-error-message>
+  </mat-card-footer>
+</mat-card>

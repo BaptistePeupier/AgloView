@@ -10,7 +10,8 @@ import {AuthenticationService} from '../../authentication.service';
 export class AnnonceurNavbarComponent implements OnInit {
 
   private nav = [                                     // List of links where the navBar should be displayed.
-    'AnnonceurHome', 'AnnonceurStatistics', 'AnnonceurAccount'
+    'AnnonceurHome', 'AnnonceurStatistics',
+    'AnnonceurAccount', 'AnnonceurPassword'
   ];
 
   displayNavBar = false;

@@ -27,6 +27,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DeletePopupComponent } from './Common/delete-popup/delete-popup.component';
 import { AnnonceurStatistiqueComponent } from './Annonceur/annonceur-statistique/annonceur-statistique.component';
 import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonceur-account.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { ResetPasswordComponent } from './Common/reset-password/reset-password.component';
+import { AnnonceurPasswordComponent } from './Annonceur/annonceur-account/annonceur-password/annonceur-password.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonce
     AnnoncePopupComponent,
     DeletePopupComponent,
     AnnonceurStatistiqueComponent,
-    AnnonceurAccountComponent
+    AnnonceurAccountComponent,
+    ResetPasswordComponent,
+    AnnonceurPasswordComponent
   ],
     imports: [
         FormsModule,
@@ -59,7 +64,8 @@ import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonce
         MatIconModule,
         MatMenuModule,
         MatChipsModule,
-        MatDialogModule
+        MatDialogModule,
+        MatTooltipModule
     ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
