@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {AuthenticationService} from './authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import {Title} from '@angular/platform-browser';
 export class AppComponent {
   title = 'AgloView';
 
-  constructor(private titleService: Title) {
+  constructor(private titleService: Title,
+              public auth: AuthenticationService) {
     this.titleService.setTitle(this.title);
   }
+
 }

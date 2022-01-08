@@ -1,0 +1,49 @@
+@import "src/scss/styles";
+
+nav{
+  box-shadow: -1px 10px 39px -13px rgba(0,0,0,0.83);
+  -webkit-box-shadow: -1px 10px 39px -13px rgba(0,0,0,0.83);
+  -moz-box-shadow: -1px 10px 39px -13px rgba(0,0,0,0.83);
+  margin-bottom: 60px ;
+}
+
+.navbar-brand{
+  font-size: 40px;
+  margin-left: 10px;
+  font-weight: bold;
+
+  .mat-icon, span {
+    vertical-align: middle;
+  }
+}
+
+.navbar-brand:hover {
+  color: $themeColor;
+}
+
+nav a {
+  text-transform: capitalize;
+  font-size: 1.3rem;
+}
+
+.active{
+  color: $themeColor !important;
+}
+
+#Profile {
+  margin-right: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: $themeColor;
+  }
+
+  #ProfileName, #ProfileIcon {
+    vertical-align: middle;
+  }
+
+  #ProfileIcon {
+    margin-left: 5px;
+    display:block;
+  }
+}

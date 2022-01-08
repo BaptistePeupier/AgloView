@@ -3,15 +3,15 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../../authentication.service';
 
 @Component({
-  selector: 'app-annonceur-navbar',
-  templateUrl: './annonceur-navbar.component.html',
-  styleUrls: ['./annonceur-navbar.component.scss']
+  selector: 'app-admin-navbar',
+  templateUrl: './admin-navbar.component.html',
+  styleUrls: ['./admin-navbar.component.scss']
 })
-export class AnnonceurNavbarComponent implements OnInit {
+export class AdminNavbarComponent implements OnInit {
 
   private nav = [                                     // List of links where the navBar should be displayed.
-    'AnnonceurHome', 'AnnonceurStatistics',
-    'AnnonceurAccount', 'AnnonceurPassword'
+    'AdminHome', 'AdminStats',
+    'AdminAccount', 'AdminPassword'
   ];
 
   displayNavBar = false;
