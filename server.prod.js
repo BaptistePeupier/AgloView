@@ -92,12 +92,12 @@ app.post('/logout', (req, res) => Logout(req, res));
 //
 //
 app.get('/*all', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/agloview/index.html'));
 });
 
 //
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/AloView/'));
+app.use(express.static(__dirname + '/dist/agloview/'));
 
 //
 //
@@ -105,7 +105,7 @@ app.get('/*', function(req,res) {
 
 //
 //
-res.sendFile(path.join(__dirname+'/dist/AloView/index.html'));
+res.sendFile(path.join(__dirname+'/dist/agloview/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
