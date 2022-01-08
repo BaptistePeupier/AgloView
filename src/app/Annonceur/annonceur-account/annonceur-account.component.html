@@ -24,7 +24,7 @@
     <br>
 
     <button mat-raised-button color="primary" [disabled]="!modified" (click)="submitUserModifications()">
-      <span matTooltip="Activates if there are some modifications"
+      <span matTooltip="Activé si vous avez motifié des informations"
             [matTooltipPosition]="'below'"
             [matTooltipDisabled]="modified">
               Save modifications
@@ -34,3 +34,4 @@
     <app-error-message #errorMessageComponent></app-error-message>
   </mat-card-footer>
 </mat-card>
+
