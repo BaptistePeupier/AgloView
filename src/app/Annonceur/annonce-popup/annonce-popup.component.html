@@ -33,7 +33,7 @@
     <br>
 
     <p>Nombre total de vues : {{tmpAnnonce.nb_vues}}</p>
-    <p>Temps moyen passé à l'écran : {{meanTimeWatched()}}</p>
+    <p>Temps moyen passé à l'écran : {{meanTimeWatched().heures}} h {{meanTimeWatched().minutes}} min {{meanTimeWatched().secondes}} s</p>
   </mat-card-content>
 
   <app-error-message #errorMessageComponent></app-error-message>

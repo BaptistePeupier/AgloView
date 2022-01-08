@@ -7,6 +7,6 @@ const SchemaAnnonce = Schema({
   text: String,
   tags: [String],
   nb_vues: Number,
-  total_tmp_vue: [Number]
+  total_tmp_vue: [Number]   // En millisecondes
 });
 module.exports = database.model('annonces', SchemaAnnonce );

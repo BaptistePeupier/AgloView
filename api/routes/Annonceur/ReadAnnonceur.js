@@ -18,8 +18,8 @@ async function ReadAnnonceur(req, res) {
         if (err) return sendError(res, err);
         if (resp === null) return sendError(res, "Annonceur doesn't exist");
         else {
-          resp.password = "";
-          resp.salt = "";
+          resp.password = null;
+          resp.salt = null;
           resp.annonces = await Annonces.find({_id: {$in: resp.annonces}});
           return sendMessage(res, resp);
         }

@@ -1,1 +1,14 @@
-<p>annonceur-statistique works!</p>
+<mat-card class="popupGroupField">
+  <app-error-message #errorMessageComponent></app-error-message>
+
+  <mat-card-title>
+    <mat-card-title>Statistiques sur vos annonces</mat-card-title>
+  </mat-card-title>
+
+  <mat-card-content>
+    <p>Nombre total de vues de vos annonces : {{TotalVues()}}</p>
+    <p>Temps total que vos annonces ont passées à l'écran : {{TotalTemps().heures}} h {{TotalTemps().minutes}} min {{TotalTemps().secondes}} s</p>
+    <p>Meilleure annonce : {{BestAnnonce().title}}</p>
+  </mat-card-content>
+</mat-card>
+

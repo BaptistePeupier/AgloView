@@ -92,8 +92,15 @@ export class AnnoncePopupComponent implements OnInit {
     }
   }
 
-  meanTimeWatched(): number {
-    if (this.tmpAnnonce.total_tmp_vue.length <= 0) return 0;
-    return this.tmpAnnonce.total_tmp_vue.reduce((a,b) => a + b, 0) / this.tmpAnnonce.total_tmp_vue.length
+  meanTimeWatched(): {heures: number, minutes: number, secondes: number } {
+    if (this.tmpAnnonce.total_tmp_vue.length <= 0) return {heures: 0, minutes: 0, secondes: 0};
+
+    const mean_vue = this.tmpAnnonce.total_tmp_vue.reduce((a,b) => a + b, 0) / this.tmpAnnonce.total_tmp_vue.length;
+
+    const heures    = Math.floor((mean_vue / (1000 * 60 * 60)) % 24);
+    const minutes   = Math.floor((mean_vue / (1000 * 60)) % 60);
+    const secondes  = Math.floor((mean_vue / 1000) % 60);
+
+    return {heures: heures, minutes: minutes, secondes: secondes};
   }
 }

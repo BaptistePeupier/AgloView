@@ -1,4 +1,4 @@
-import {Annonce} from './classes';
+import {Annonce, Annonceur} from './classes';
 
 export function CreateAnnonce(): Annonce {
   let newAnnonce: Annonce = {
@@ -25,4 +25,14 @@ export function cloneAnnonceValues(annonce1: Annonce, annonce2: Annonce) {
   annonce2.tags           = Object.assign([],annonce1.tags);
   annonce2.title          = annonce1.title;
   annonce2.total_tmp_vue  = Object.assign([], annonce1.total_tmp_vue);
+}
+
+export function createAnnonceur(): Annonceur {
+  return {
+    _id: null,
+    annonces: [undefined],
+    email: null,
+    password: null,
+    pseudo: null
+  }
 }

@@ -7,6 +7,7 @@ import {AnnonceurGuard} from './Annonceur/annonceur.guard';
 import {AnnonceurHomeComponent} from './Annonceur/annonceur-home/annonceur-home.component';
 import {AnnonceurStatistiqueComponent} from './Annonceur/annonceur-statistique/annonceur-statistique.component';
 import {AnnonceurAccountComponent} from './Annonceur/annonceur-account/annonceur-account.component';
+import {AnnonceurPasswordComponent} from './Annonceur/annonceur-account/annonceur-password/annonceur-password.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: '', canActivateChild: [AnnonceurGuard], children: [                 // All others routes are accessible only for a logged User
       {path: 'AnnonceurHome', component: AnnonceurHomeComponent},
       {path: 'AnnonceurAccount', component: AnnonceurAccountComponent},
-      {path: 'AnnonceurStatistics', component: AnnonceurStatistiqueComponent}
+      {path: 'AnnonceurStatistics', component: AnnonceurStatistiqueComponent},
+      {path: 'AnnonceurPassword', component: AnnonceurPasswordComponent}
     ]
   }
 ]
