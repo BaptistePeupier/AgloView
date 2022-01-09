@@ -78,7 +78,7 @@ export class ListAnnonceursComponent implements OnInit {
   // Then, sort alphabetically the datasource
   UpdateAnnonceur(annonceur: Annonceur) {
     const dialogRef = this.dialog.open(AnnonceurPopupComponent, {
-      width: '30%',
+      width: '75%',
       data: annonceur
     });
 

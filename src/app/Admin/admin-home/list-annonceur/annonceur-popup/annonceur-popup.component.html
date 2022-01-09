@@ -20,6 +20,50 @@
     </mat-card-content>
   </mat-card>
 
+  <mat-card class="popupGroupField">
+    <mat-card-header>
+      <mat-card-title>Annonces de {{annonceur.pseudo}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-card class="popupGroupField" *ngFor="let annonce of annonces">
+        <mat-card-title class="InputTitle">
+          <input matInput [(ngModel)]="annonce.title" placeholder="Titre de l'annonce *" required>
+        </mat-card-title>
+
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Texte</mat-label>
+            <textarea matInput type="email" [(ngModel)]="annonce.text" required></textarea>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field style="width: 100%" appearance="fill">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let tag of annonce.tags" (removed)="removeTag(annonce, tag)">
+                {{tag}}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input placeholder="Nouveau tag..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputAddOnBlur]="true"
+                     (matChipInputTokenEnd)="addTag(annonce, $event)">
+            </mat-chip-list>
+          </mat-form-field>
+
+          <mat-card-footer class="ButtonFooter">
+            <button mat-raised-button color="warn" (click)="DeleteAnnonce(annonce)">Supprimer l'Annonce</button>
+            <button mat-raised-button color="primary" (click)="UpdateAnnonce(annonce)">Submit</button>
+          </mat-card-footer>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+
   <app-error-message #errorMessageComponent></app-error-message>
 
   <div class="ButtonFooter">

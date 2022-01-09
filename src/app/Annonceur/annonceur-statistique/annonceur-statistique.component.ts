@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Annonce} from '../../Common/Schemas/classes';
 import {MessageService} from '../../message.service';
 import {AuthenticationService} from '../../authentication.service';
+import {CreateAnnonce} from '../../Common/Schemas/creation';
 
 @Component({
   selector: 'app-annonceur-statistique',
@@ -61,9 +62,13 @@ export class AnnonceurStatistiqueComponent implements OnInit {
   }
 
   BestAnnonce(): Annonce {
-    return this.annonces.sort(function (annonce1: Annonce, annonce2: Annonce) {
-      return annonce2.nb_vues - annonce1.nb_vues;
-    })[0];
+    if (typeof this.annonces !== 'undefined') {
+      return this.annonces.sort(function (annonce1: Annonce, annonce2: Annonce) {
+        return annonce2.nb_vues - annonce1.nb_vues;
+      })[0];
+    }
+
+    else return CreateAnnonce();
   }
 }
 

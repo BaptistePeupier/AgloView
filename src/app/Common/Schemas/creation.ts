@@ -28,13 +28,17 @@ export function cloneAnnonceValues(annonce1: Annonce, annonce2: Annonce) {
 }
 
 export function createAnnonceur(): Annonceur {
-  return {
+  const newAnnonceur: Annonceur = {
     _id: null,
-    annonces: [undefined],
+    annonces: [null],
     email: null,
     password: null,
     pseudo: null
   }
+
+  newAnnonceur.annonces.pop();
+
+  return newAnnonceur;
 }
 
 // Clone the value of the Annonceur1 to the Annonceur2
@@ -66,15 +70,20 @@ export function cloneAdminValues(admin1: Admin, admin2: Admin) {
 }
 
 export function createUser(): User {
-  return {
-    playlists: [undefined],
-    tags: [undefined],
+  const newUser: User = {
+    playlists: [null],
+    tags: [null],
     _id: null,
     email: null,
     age: null,
     password: null,
     pseudo: null
   }
+
+  newUser.playlists.pop();
+  newUser.tags.pop()
+
+  return newUser;
 }
 
 // Clone the value of the User1 to the User2
