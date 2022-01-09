@@ -7,6 +7,7 @@ const pbkdf2 = require("pbkdf2/lib/sync");
 //
 async function UpdateAdmin(req, res) {
   // Check fields.
+  console.log(req.body)
   if (
     (typeof req.body._id !== 'undefined') && (req.body._id !== null) &&
     (typeof req.body.pseudo !== 'undefined') &&

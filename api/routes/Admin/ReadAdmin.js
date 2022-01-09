@@ -6,11 +6,11 @@ const {isAdmin} = require("../../Outils/auth");
 async function ReadAdmin(req, res) {
   // Check fields.
   if (
-    (typeof req.body.email !== 'undefined') && (req.body.email !== null) &&
-    (typeof req.body._id !== 'undefined') && (req.body._id !== null)
+    (typeof req.query.email !== 'undefined') && (req.query.email !== null) &&
+    (typeof req.query._id !== 'undefined') && (req.query._id !== null)
   ) {
     if (isAdmin(req, res)) {
-      Admins.findOne({_id: req.body._id, email: req.body.email}, (err, resp) => {
+      Admins.findOne({_id: req.query._id, email: req.query.email}, (err, resp) => {
           if(err) return sendError(res, err);
           if(resp === null) return sendError(res, "Admin doesn't exist");
           else {

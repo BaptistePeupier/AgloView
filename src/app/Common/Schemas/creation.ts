@@ -1,4 +1,4 @@
-import {Annonce, Annonceur} from './classes';
+import {Annonce, Annonceur, Admin} from './classes';
 
 export function CreateAnnonce(): Annonce {
   let newAnnonce: Annonce = {
@@ -32,6 +32,16 @@ export function createAnnonceur(): Annonceur {
     _id: null,
     annonces: [undefined],
     email: null,
+    password: null,
+    pseudo: null
+  }
+}
+
+export function createAdmin(): Admin {
+  return {
+    _id: null,
+    email: null,
+    age: null,
     password: null,
     pseudo: null
   }

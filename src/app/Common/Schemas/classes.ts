@@ -15,3 +15,11 @@ export interface Annonceur {
   password: string,
   annonces: [Annonce]
 }
+
+export interface Admin {
+  _id: number,
+  pseudo: string,
+  age: number,
+  email: string,
+  password: string,
+}
