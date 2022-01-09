@@ -23,7 +23,7 @@ export class AnnonceurAccountComponent implements OnInit {
               private auth: AuthenticationService,
               public dialog: MatDialog) { }
 
-  // Retrieve the User's data.
+  // Retrieve the Annonceur's data.
   ngOnInit(): void {
     this.currentAnnonceur = createAnnonceur();
     this.currentAnnonceur._id = this.auth.getId();
@@ -41,7 +41,7 @@ export class AnnonceurAccountComponent implements OnInit {
   }
 
   // Update the Annonceur's data & update it's displayed Annonceur Name.
-  submitUserModifications() {
+  submitAdnnonceurModifications() {
     this.msg.Update('annonceur', this.currentAnnonceur).subscribe(
       res => {
         if (res.status === 'error') {

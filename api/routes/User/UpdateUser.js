@@ -30,7 +30,7 @@ async function UpdateUser(req, res) {
 
       if (req.body.email !== null) {
         // Check if a user doesn't use the passed email.
-        const userAlreadyExist = await Users.findOne({email: req.body.email}).where("_id").ne(getUserID(req));
+        const userAlreadyExist = await Users.findOne({email: req.body.email}).where("_id").ne(req.body._id);
         if (userAlreadyExist !== null) {
           return sendError(res, "Can not update this user with this email, a user with same email already exists")
         }

@@ -7,6 +7,7 @@ const pbkdf2 = require("pbkdf2/lib/sync");
 //
 async function UpdateAdmin(req, res) {
   // Check fields.
+  console.log(req.body)
   if (
     (typeof req.body._id !== 'undefined') && (req.body._id !== null) &&
     (typeof req.body.pseudo !== 'undefined') &&
@@ -27,7 +28,7 @@ async function UpdateAdmin(req, res) {
 
       if (req.body.email !== null) {
         // Check if an Admin doesn't use the passed email.
-        const adminAlreadyExist = await Admins.findOne({email: req.body.email}).where("_id").ne(getUserID(req));
+        const adminAlreadyExist = await Admins.findOne({email: req.body.email}).where("_id").ne(req.body._id);
         if (adminAlreadyExist !== null) {
           return sendError(res, "Can not update this Admin with this email, an Admin with same email already exists")
         }

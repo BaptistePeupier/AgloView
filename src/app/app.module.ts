@@ -12,8 +12,19 @@ import { PasswordValidatorDirective } from './directives/password-validator.dire
 import { LoginComponent } from './login/login.component';
 import { UserHomeComponent } from './User/user-home/user-home.component';
 import { ErrorMessageComponent } from './Common/error-message/error-message.component';
-import {AnnonceurHomeComponent} from './Annonceur/annonceur-home/annonceur-home.component';
-import {AnnonceurNavbarComponent} from './Annonceur/annonceur-navbar/annonceur-navbar.component';
+import { AnnonceurHomeComponent } from './Annonceur/annonceur-home/annonceur-home.component';
+import { AnnonceurNavbarComponent } from './Annonceur/annonceur-navbar/annonceur-navbar.component';
+import { AnnoncePopupComponent } from './Annonceur/annonce-popup/annonce-popup.component';
+import { AnnonceurStatistiqueComponent } from './Annonceur/annonceur-statistique/annonceur-statistique.component';
+import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonceur-account.component';
+import { ResetPasswordComponent } from './Common/reset-password/reset-password.component';
+import { AnnonceurPasswordComponent } from './Annonceur/annonceur-account/annonceur-password/annonceur-password.component';
+import { CreateAccountComponent } from './login/create-account/create-account.component';
+import { DeletePopupComponent } from './Common/delete-popup/delete-popup.component';
+import { AdminHomeComponent } from './Admin/admin-home/admin-home.component';
+import { ListUsersComponent } from './Admin/admin-home/list-users/list-users.component';
+import { ListAnnonceursComponent } from './Admin/admin-home/list-annonceur/list-annonceurs.component';
+import { ListAdminsComponent } from './Admin/admin-home/list-admins/list-admins.component';
 
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -22,16 +33,19 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
-import { AnnoncePopupComponent } from './Annonceur/annonce-popup/annonce-popup.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DeletePopupComponent } from './Common/delete-popup/delete-popup.component';
-import { AnnonceurStatistiqueComponent } from './Annonceur/annonceur-statistique/annonceur-statistique.component';
-import { AnnonceurAccountComponent } from './Annonceur/annonceur-account/annonceur-account.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { ResetPasswordComponent } from './Common/reset-password/reset-password.component';
-import { AnnonceurPasswordComponent } from './Annonceur/annonceur-account/annonceur-password/annonceur-password.component';
-import { CreateAccountComponent } from './login/create-account/create-account.component';
 import {MatSelectModule} from '@angular/material/select';
+import { AdminStatsComponent } from './Admin/admin-stats/admin-stats.component';
+import { AdminAccountComponent } from './Admin/admin-account/admin-account.component';
+import { AdminPasswordComponent } from './Admin/admin-account/admin-password/admin-password.component';
+import { AdminNavbarComponent } from './Admin/admin-navbar/admin-navbar.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { UserPopupComponent } from './Admin/admin-home/list-users/user-popup/user-popup.component';
+import { AdminPopupComponent } from './Admin/admin-home/list-admins/admin-popup/admin-popup.component';
+import { AnnonceurPopupComponent } from './Admin/admin-home/list-annonceur/annonceur-popup/annonceur-popup.component';
 
 @NgModule({
   declarations: [
@@ -49,28 +63,42 @@ import {MatSelectModule} from '@angular/material/select';
     AnnonceurAccountComponent,
     ResetPasswordComponent,
     AnnonceurPasswordComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    AdminHomeComponent,
+    ListUsersComponent,
+    ListAnnonceursComponent,
+    ListAdminsComponent,
+    AdminStatsComponent,
+    AdminAccountComponent,
+    AdminPasswordComponent,
+    AdminNavbarComponent,
+    UserPopupComponent,
+    AdminPopupComponent,
+    AnnonceurPopupComponent
   ],
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatChipsModule,
-        MatDialogModule,
-        MatTooltipModule,
-        MatSelectModule
-    ],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
+  ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

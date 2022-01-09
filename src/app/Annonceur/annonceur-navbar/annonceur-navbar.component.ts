@@ -51,7 +51,7 @@ export class AnnonceurNavbarComponent implements OnInit {
           }
         }
       }
-    )
+    );
   }
 
 }
