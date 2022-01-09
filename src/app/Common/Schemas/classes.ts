@@ -23,3 +23,25 @@ export interface Admin {
   email: string,
   password: string,
 }
+
+export interface User {
+  _id: number,
+  pseudo: string,
+  age: number,
+  email: string,
+  password: string,
+  tags: [{
+    tag: string,
+    occurrence: number
+  }],
+  playlists: [Playlist]
+}
+
+export interface Playlist {
+  name: string,
+  videos: [Video]
+}
+
+export interface Video {
+  link: string
+}

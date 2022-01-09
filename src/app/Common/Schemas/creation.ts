@@ -1,4 +1,4 @@
-import {Annonce, Annonceur, Admin} from './classes';
+import {Annonce, Annonceur, Admin, User, Video, Playlist} from './classes';
 
 export function CreateAnnonce(): Annonce {
   let newAnnonce: Annonce = {
@@ -17,7 +17,7 @@ export function CreateAnnonce(): Annonce {
   return newAnnonce;
 }
 
-// Clone the value of the mission1 to the mission2
+// Clone the value of the Annonce1 to the Annonce2
 export function cloneAnnonceValues(annonce1: Annonce, annonce2: Annonce) {
   annonce2._id            = annonce1._id;
   annonce2.nb_vues        = annonce1.nb_vues;
@@ -45,4 +45,27 @@ export function createAdmin(): Admin {
     password: null,
     pseudo: null
   }
+}
+
+export function createUser(): User {
+  return {
+    playlists: [undefined],
+    tags: [undefined],
+    _id: null,
+    email: null,
+    age: null,
+    password: null,
+    pseudo: null
+  }
+}
+
+// Clone the value of the User1 to the User2
+export function cloneUserValues(user1: User, user2: User) {
+  user2._id       = user1._id;
+  user2.email     = user1.email;
+  user2.age       = user1.age;
+  user2.password  = user1.password;
+  user2.pseudo    = user1.pseudo;
+  user2.tags      = Object.assign([],user1.tags);
+  user2.playlists = Object.assign([],user1.playlists);
 }

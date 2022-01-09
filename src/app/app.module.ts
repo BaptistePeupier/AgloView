@@ -41,6 +41,9 @@ import { AdminAccountComponent } from './Admin/admin-account/admin-account.compo
 import { AdminPasswordComponent } from './Admin/admin-account/admin-password/admin-password.component';
 import { AdminNavbarComponent } from './Admin/admin-navbar/admin-navbar.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { UserPopupComponent } from './Admin/admin-home/list-users/user-popup/user-popup.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     AdminStatsComponent,
     AdminAccountComponent,
     AdminPasswordComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    UserPopupComponent
   ],
   imports: [
     FormsModule,
@@ -87,7 +91,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDialogModule,
     MatTooltipModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
