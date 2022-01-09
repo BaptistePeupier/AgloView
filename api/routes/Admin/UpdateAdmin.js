@@ -28,7 +28,7 @@ async function UpdateAdmin(req, res) {
 
       if (req.body.email !== null) {
         // Check if an Admin doesn't use the passed email.
-        const adminAlreadyExist = await Admins.findOne({email: req.body.email}).where("_id").ne(getUserID(req));
+        const adminAlreadyExist = await Admins.findOne({email: req.body.email}).where("_id").ne(req.body._id);
         if (adminAlreadyExist !== null) {
           return sendError(res, "Can not update this Admin with this email, an Admin with same email already exists")
         }

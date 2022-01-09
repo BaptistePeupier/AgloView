@@ -44,6 +44,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { UserPopupComponent } from './Admin/admin-home/list-users/user-popup/user-popup.component';
+import { AdminPopupComponent } from './Admin/admin-home/list-admins/admin-popup/admin-popup.component';
+import { AnnonceurPopupComponent } from './Admin/admin-home/list-annonceur/annonceur-popup/annonceur-popup.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { UserPopupComponent } from './Admin/admin-home/list-users/user-popup/use
     AdminAccountComponent,
     AdminPasswordComponent,
     AdminNavbarComponent,
-    UserPopupComponent
+    UserPopupComponent,
+    AdminPopupComponent,
+    AnnonceurPopupComponent
   ],
   imports: [
     FormsModule,

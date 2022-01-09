@@ -37,6 +37,15 @@ export function createAnnonceur(): Annonceur {
   }
 }
 
+// Clone the value of the Annonceur1 to the Annonceur2
+export function cloneAnnonceurValues(Annonceur1: Annonceur, Annonceur2: Annonceur) {
+  Annonceur2._id      = Annonceur1._id;
+  Annonceur2.email    = Annonceur1.email;
+  Annonceur2.password = Annonceur1.password;
+  Annonceur2.pseudo   = Annonceur1.pseudo;
+  Annonceur2.annonces = Object.assign([],Annonceur2.annonces);
+}
+
 export function createAdmin(): Admin {
   return {
     _id: null,
@@ -45,6 +54,15 @@ export function createAdmin(): Admin {
     password: null,
     pseudo: null
   }
+}
+
+// Clone the value of the Admin1 to the Admin2
+export function cloneAdminValues(admin1: Admin, admin2: Admin) {
+  admin2._id      = admin1._id;
+  admin2.email    = admin1.email;
+  admin2.age      = admin1.age;
+  admin2.password = admin1.password;
+  admin2.pseudo   = admin1.pseudo;
 }
 
 export function createUser(): User {

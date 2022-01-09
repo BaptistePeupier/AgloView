@@ -29,7 +29,7 @@ async function UpdateAnnonceur(req, res) {
 
       if (req.body.email !== null) {
         // Check if an Annonceur doesn't use the passed email.
-        const annonceurAlreadyExist = await Annoneurs.findOne({email: req.body.email}).where("_id").ne(getUserID(req));
+        const annonceurAlreadyExist = await Annoneurs.findOne({email: req.body.email}).where("_id").ne(req.body._id);
         if (annonceurAlreadyExist !== null) {
           return sendError(res, "Can not update this annonceur with this email, a annonceur with same email already exists")
         }
