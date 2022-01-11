@@ -14,13 +14,17 @@ import {AdminAccountComponent} from './Admin/admin-account/admin-account.compone
 import {AdminStatsComponent} from './Admin/admin-stats/admin-stats.component';
 import {AdminPasswordComponent} from './Admin/admin-account/admin-password/admin-password.component';
 import {AdminGuard} from './Admin/admin.guard';
+import {UserPasswordComponent} from './User/user-account/user-password/user-password.component';
+import {UserAccountComponent} from './User/user-account/user-account.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'CreateAccount', component: CreateAccountComponent },
 
   { path: '', canActivateChild: [UserGuard], children: [                      // All others routes are accessible only for a logged User
-      {path: 'UserHome', component: UserHomeComponent}
+      {path: 'UserHome', component: UserHomeComponent},
+      {path: 'UserAccount', component: UserAccountComponent},
+      {path: 'UserPassword', component: UserPasswordComponent}
     ]
   },
 

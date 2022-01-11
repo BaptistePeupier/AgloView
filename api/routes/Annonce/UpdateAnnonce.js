@@ -1,10 +1,20 @@
 const Annonces = require("../../Outils/Schema/Annonces");
 const Annonceurs = require("../../Outils/Schema/Annonceurs");
-const {getUserID, isAnnonceur, getSession} = require("../../Outils/auth");
+const {getUserID, isAnnonceur, getSession, isUser} = require("../../Outils/auth");
 const {sendError, sendMessage} = require("../../Outils/helper");
 
 async function UpdateAnnonce(req, res) {
-  if (
+  if(isUser(req, res)) {
+    const annonce = await Annonces.findOne({_id: req.body._id});
+    annonce.total_tmp_vue.push(req.body.tmp_vue);
+
+    Annonces.updateOne({_id: annonce._id}, {total_tmp_vue: annonce.total_tmp_vue}, (err, resp) => {
+      if (err) return sendError(res, err);
+      return sendMessage(res, annonce);
+    });
+  }
+
+  else if (
     (getSession(req).userInfo.role === "admin") ||
     (isAnnonceur(req, res))
   ) {
@@ -36,7 +46,6 @@ async function UpdateAnnonce(req, res) {
             annonce.title = req.body.title;
             annonce.text = req.body.text;
             annonce.tags = req.body.tags;
-            if (req.body.tmp_vue !== null) annonce.total_tmp_vue.push(req.body.tmp_vue);
 
             Annonces.updateOne({_id: req.body._id}, annonce, (err, resp) => {
               if (err) return sendError(res, err);

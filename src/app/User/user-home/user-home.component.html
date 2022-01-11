@@ -2,8 +2,11 @@
   <!-- Sidebar  -->
   <nav id="sidebar">
 
-    <div class="sidebar-header">
-      <a class=" nav-link text-center" href="#">
+    <div class="sidebar-header nav">
+      <a class=" nav-link" routerLink="/UserAccount">
+        <img src="assets/parametre.png" width="30"  alt=""/>
+      </a>
+      <a class=" nav-link text-center" routerLink="/UserAccount">
         <img src="assets/profil.png" width="100"  alt=""/>
       </a>
     </div>
@@ -53,12 +56,23 @@
       </a>
     </nav>
 
-    <iframe width="100%" height="80%"
+    <mat-card *ngIf="displayAnnonce == true" class="alert" >
+      <mat-label>{{annonce.text}}</mat-label>
+      <mat-icon class="closebtn" (click)="closeAnnonce()">close</mat-icon>
+    </mat-card>
+
+    <iframe width="100%" height="70%"
             [src]="getVideoLink(null)"
             frameborder="0"
             webkitallowfullscreen
             mozallowfullscreen
             allowfullscreen>
     </iframe>
+
+    <mat-card *ngIf="displayAnnonce == true" class="alert" >
+      <mat-label>{{annonce.text}}</mat-label>
+      <mat-icon class="closebtn" (click)="closeAnnonce()">close</mat-icon>
+    </mat-card>
   </div>
 </div>
+
