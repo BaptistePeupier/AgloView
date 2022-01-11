@@ -1,1 +1,30 @@
-<p>admin-stats works!</p>
+<mat-card>
+  <mat-card-title class="popupGroupField">
+    <mat-card-title>Statistiques sur les Utilisateurs</mat-card-title>
+  </mat-card-title>
+
+  <mat-card-content>
+    <p>Nombre total d'utilisateur : {{numberUser()}}</p>
+    <p>Top 10 des tags :</p>
+    <ol>
+      <li *ngFor="let tag of topTag()">{{tag.tag}}</li>
+    </ol>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title class="popupGroupField">
+    <mat-card-title>Statistiques sur les Annonceurs</mat-card-title>
+  </mat-card-title>
+
+  <mat-card-content>
+    <p>Nombre total d'annonceurs : {{numberAnnonceur()}}</p>
+    <p>Nombre total d'annonces : {{numberAnnonce()}}</p>
+    <p>Top 10 des annonces :</p>
+    <ol>
+      <li *ngFor="let annonce of topAnnonce()">{{annonce.title}}</li>
+    </ol>
+  </mat-card-content>
+</mat-card>
+
+<app-error-message #errorMessageComponent></app-error-message>
