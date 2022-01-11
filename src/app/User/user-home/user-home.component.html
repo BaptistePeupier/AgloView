@@ -9,16 +9,14 @@
     </div>
 
     <ul class="list-unstyled components text-center">
-      <p>User Name</p>
+      <p>{{auth.getUserName()}}</p>
 
       <nav class="nav navbarp ">
         <a class="nav-item nav-link">
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn buttonPlay " id="dropdownBasic1" ngbDropdownToggle>Playlist 1</button>
+          <div *ngFor="let playlist of playlists" ngbDropdown class="d-inline-block">
+            <button class="btn buttonPlay " id="dropdownBasic1" ngbDropdownToggle>{{playlist.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem>Video1</button>
-              <button ngbDropdownItem>Video2</button>
-              <button ngbDropdownItem>Video3</button>
+              <button *ngFor="let video of playlist.videos" ngbDropdownItem (click)="getVideoLink(video)">{{video.title}}</button>
             </div>
           </div>
         </a>
@@ -38,6 +36,7 @@
 
   <!-- Page Content  -->
   <div id="content">
+    <app-error-message #errorMessageComponent></app-error-message>
 
     <nav class="nav navbar nav-pills nav-justified nav-fill">
       <a class="nav-item nav-link" >
@@ -54,8 +53,12 @@
       </a>
     </nav>
 
-    <iframe width="100%" height="80%" [src]="safeSrc"  frameborder="0" webkitallowfullscreen mozallowfullscreen
-            allowfullscreen></iframe>
-
+    <iframe width="100%" height="80%"
+            [src]="getVideoLink(null)"
+            frameborder="0"
+            webkitallowfullscreen
+            mozallowfullscreen
+            allowfullscreen>
+    </iframe>
   </div>
 </div>

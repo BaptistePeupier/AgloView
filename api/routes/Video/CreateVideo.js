@@ -32,7 +32,8 @@ async function CreateVideo(req, res) {
 
           // Save video in DB
           const newVideo = new Videos({
-            link: req.body.youtube_video_id
+            link: req.body.youtube_video_id,
+            title: video.data.items[0].snippet.title
           });
           await newVideo.save((err, resp) => {
             if(err) return sendError(res, err);
@@ -48,32 +49,33 @@ async function CreateVideo(req, res) {
           const currentUser = await Users.findOne({_id: getUserID(req)});
           if (currentUser !== null){
             let wordsTags;
-            for (let i = 0 ; i < video_tags.length ; i++) {
-              wordsTags = video_tags[i].split(/(?<=^\S+)\s/);
-              wordsTags = wordsTags.map(tag => tag.toLowerCase());  // Lowercase tag to facilitate search with annonce's tag.
 
-              for (let j = 0 ; j < wordsTags.length ; j++) {
-                // check if tag exists: if already in user's lists, update occurrences of it.
-                const tagExists = currentUser.tags.find(element => {
-                  if ((typeof element.tag !== 'undefined') && (element.tag.includes(wordsTags[j]))) {
-                    element.occurrence ++;
-                    return true;
+            if (typeof video_tags !== 'undefined') {
+              for (let i = 0 ; i < video_tags.length ; i++) {
+                wordsTags = video_tags[i].split(/(?<=^\S+)\s/);
+                wordsTags = wordsTags.map(tag => tag.toLowerCase());  // Lowercase tag to facilitate search with annonce's tag.
+
+                for (let j = 0 ; j < wordsTags.length ; j++) {
+                  // check if tag exists: if already in user's lists, update occurrences of it.
+                  const tagExists = currentUser.tags.find(element => {
+                    if ((typeof element.tag !== 'undefined') && (element.tag.includes(wordsTags[j]))) {
+                      element.occurrence ++;
+                      return true;
+                    }
+                  });
+
+                  // if it doesn't exist, add it with 1 occurrence.
+                  if (tagExists === undefined) {
+                    currentUser.tags.push({tag: wordsTags[j], occurrence: 1});
                   }
-                });
-
-                // if it doesn't exist, add it with 1 occurrence.
-                if (tagExists === undefined) {
-                  currentUser.tags.push({tag: wordsTags[j], occurrence: 1});
                 }
               }
+
+              // save Users' tags
+              Users.updateOne({_id: getUserID(req)}, {tags: currentUser.tags}, (err, resp) => {
+                if(err) return sendError(res, err);
+              });
             }
-
-            // save Users' tags
-            Users.updateOne({_id: getUserID(req)}, {tags: currentUser.tags}, (err, resp) => {
-              if(err) return sendError(res, err);
-            });
-
-
 
             sendMessage(res, {
               video_id: newVideo._id,

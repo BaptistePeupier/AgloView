@@ -47,6 +47,7 @@ import { UserPopupComponent } from './Admin/admin-home/list-users/user-popup/use
 import { AdminPopupComponent } from './Admin/admin-home/list-admins/admin-popup/admin-popup.component';
 import { AnnonceurPopupComponent } from './Admin/admin-home/list-annonceur/annonceur-popup/annonceur-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -77,30 +78,31 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AdminPopupComponent,
     AnnonceurPopupComponent
   ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatChipsModule,
-    MatDialogModule,
-    MatTooltipModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    NgbModule
-  ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatChipsModule,
+        MatDialogModule,
+        MatTooltipModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        NgbModule,
+        YouTubePlayerModule
+    ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

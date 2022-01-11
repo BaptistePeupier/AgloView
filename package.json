@@ -1,6 +1,6 @@
 {
   "name": "agloview",
-  "version": "0.0.0",
+  "version": "0.4.0",
   "scripts": {
     "ng": "ng",
     "localng": "ng serve --host 127.0.0.1 --port 4200",
@@ -34,6 +34,7 @@
     "@angular/platform-browser": "13.0.3",
     "@angular/platform-browser-dynamic": "13.0.3",
     "@angular/router": "13.0.3",
+    "@angular/youtube-player": "^13.1.1",
     "@ng-bootstrap/ng-bootstrap": "^11.0.0",
     "@sendgrid/mail": "6.4.0",
     "axios": "^0.24.0",
