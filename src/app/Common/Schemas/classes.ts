@@ -38,10 +38,13 @@ export interface User {
 }
 
 export interface Playlist {
+  _id: string,
   name: string,
   videos: [Video]
 }
 
 export interface Video {
-  link: string
+  _id: string,
+  link: string,
+  title: string
 }
