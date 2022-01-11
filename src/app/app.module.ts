@@ -46,6 +46,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { UserPopupComponent } from './Admin/admin-home/list-users/user-popup/user-popup.component';
 import { AdminPopupComponent } from './Admin/admin-home/list-admins/admin-popup/admin-popup.component';
 import { AnnonceurPopupComponent } from './Admin/admin-home/list-annonceur/annonceur-popup/annonceur-popup.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,8 @@ import { AnnonceurPopupComponent } from './Admin/admin-home/list-annonceur/annon
     MatSelectModule,
     MatTabsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgbModule
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
