@@ -2,12 +2,10 @@
 #### Angular UI + Bootstrap + Node/Express API + MySQL Database on Heroku
 
 ## Development Environment
-Node 10.15.0
-npm 6.4.1
-Angular CLI 8.3.18
+Node 17.3.0
+npm 8.3.0
+Angular CLI 13.0.4
 [Heroku](https://www.heroku.com) to run our server
-[JawsDB](https://elements.heroku.com/addons/jawsdb) for MySQL on Heroku
-[SendGrid](https://elements.heroku.com/addons/sendgrid) for sending emails from Heroku
 
 ## Heroku Notes
 - You will need a (free) [Heroku](https://www.heroku.com) account
