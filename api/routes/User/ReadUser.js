@@ -6,14 +6,14 @@ const {getSession, getUserID} = require("../../Outils/auth");
 async function ReadUser(req, res) {
   // Check fields.
   if (
-    (typeof req.body.email !== 'undefined') && (req.body.email !== null) &&
-    (typeof req.body._id !== 'undefined') && (req.body._id !== null)
+    (typeof req.query.email !== 'undefined') && (req.query.email !== null) &&
+    (typeof req.query._id !== 'undefined') && (req.query._id !== null)
   ) {
     if (
       (getSession(req).userInfo.role === "admin") ||
-      ((getUserID(req) === req.body._id)) && (getSession(req).userInfo.role === "user")
+      ((getUserID(req) === req.query._id)) && (getSession(req).userInfo.role === "user")
     ) {
-      Users.findOne({_id: req.body._id, email: req.body.email}, (err, resp) => {
+      Users.findOne({_id: req.query._id, email: req.query.email}, (err, resp) => {
           if(err) return sendError(res, err);
           if(resp === null) return sendError(res, "User doesn't exist");
           else {

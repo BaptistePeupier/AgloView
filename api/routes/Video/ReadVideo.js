@@ -7,7 +7,7 @@ const {sendMessage, sendError} = require("../../Outils/helper");
 async function ReadVideo(req, res) {
   if (isUser(req, res)) {
     if (
-      (typeof req.body.video_id !== "undefined") && (req.body.video_id !== null)
+      (typeof req.query.video_id !== "undefined") && (req.query.video_id !== null)
     ) {
       // Check the right of the user
       const currentUser = await Users.findOne({_id: getUserID(req)})
@@ -23,15 +23,15 @@ async function ReadVideo(req, res) {
         while ((!videoFound) && (i < currentUser.playlists.length)) {
           let j = 0;
           while ((!videoFound) && (j < currentUser.playlists[i].videos.length)) {
-            if (currentUser.playlists[i].videos[j]._id.toString() === req.body.video_id) videoFound = true;
+            if (currentUser.playlists[i].videos[j]._id.toString() === req.query.video_id) videoFound = true;
             j++;
           }
           i++;
         }
 
         if (videoFound) {
-          if ((typeof req.body.video_id !== "undefined") && (req.body.video_id !== null)) {
-            Videos.findOne({_id: req.body.video_id}, (err, resp) => {
+          if ((typeof req.query.video_id !== "undefined") && (req.query.video_id !== null)) {
+            Videos.findOne({_id: req.query.video_id}, (err, resp) => {
               if (err) return sendError(res, err);
               return sendMessage(res, resp);
             });

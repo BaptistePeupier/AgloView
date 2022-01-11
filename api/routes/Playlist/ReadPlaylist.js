@@ -6,14 +6,14 @@ const {sendError, sendMessage} = require("../../Outils/helper");
 
 async function ReadPlaylist(req, res) {
   if (isUser(req, res)){
-    if ((typeof req.body.playlist_id !== 'undefined') && (req.body.playlist_id !== null)) {
+    if ((typeof req.query.playlist_id !== 'undefined') && (req.query.playlist_id !== null)) {
 
       // Check if the User own the Playlist
       const user = await Users.findOne({_id: getUserID(req)});
-      const playlist = user.playlists.filter(playlist => playlist._id.toString() === req.body.playlist_id)[0];
+      const playlist = user.playlists.filter(playlist => playlist._id.toString() === req.query.playlist_id)[0];
 
       if (typeof playlist !== 'undefined') {
-        const playlist = await Playlists.findOne({_id: req.body.playlist_id});
+        const playlist = await Playlists.findOne({_id: req.query.playlist_id});
         playlist.videos = await Videos.find({_id: {$in:playlist.videos}});
 
         sendMessage(res, playlist);
