@@ -27,9 +27,7 @@ const routes: Routes = [
   { path: '', canActivateChild: [UserGuard], children: [                      // All others routes are accessible only for a logged User
       {path: 'UserHome', component: UserHomeComponent},
       {path: 'UserAccount', component: UserAccountComponent},
-      {path: 'UserPassword', component: UserPasswordComponent},
-      {path : 'newp' , component: PlaylistPopupComponent},
-      {path : 'newv', component: VideoPopupComponent}
+      {path: 'UserPassword', component: UserPasswordComponent}
     ]
   },
 
