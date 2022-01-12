@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {Playlist, Video} from '../../Common/Schemas/classes';
+import {Annonce, Playlist, Video} from '../../Common/Schemas/classes';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthenticationService} from '../../authentication.service';
 import {MessageService} from '../../message.service';
@@ -12,17 +11,18 @@ import {MessageService} from '../../message.service';
 })
 export class UserHomeComponent implements OnInit {
 
-  // name = 'Angular 6';
-
   playlists : Playlist[] = [];
   videoCurrentlyDisplayed: Video = null;
+
+  annonce: Annonce;
+  displayAnnonce: boolean = true;
+  startAnnonceDisplay = new Date();
 
   @ViewChild('errorMessageComponent') errorMessage;
 
   constructor(private msg: MessageService,
               public auth: AuthenticationService,
-              public dialog: MatDialog,
-              private sanitizer: DomSanitizer) {
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -47,9 +47,18 @@ export class UserHomeComponent implements OnInit {
         }
       }
     });
+
+    this.msg.Read('getAnnonceForUser', null).subscribe(res=> {
+      if(res.status === 'error') {
+        this.errorMessage.sendError(res.data.reason);
+      }
+      else {
+        this.annonce = res.data;
+      }
+    });
   }
 
-  getVideoLink(video: Video = null) : SafeResourceUrl {
+  getVideoLink(video: Video = null) : string {
     if (video === null) {
       if ((this.videoCurrentlyDisplayed === null) && (this.playlists.length !== 0) && (typeof this.playlists[0].videos[0] !== 'undefined')) {
         this.videoCurrentlyDisplayed = this.playlists[0].videos[0];
@@ -60,10 +69,36 @@ export class UserHomeComponent implements OnInit {
     }
 
     if (this.videoCurrentlyDisplayed !== null) {
-      return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.videoCurrentlyDisplayed.link);
+      return ("https://www.youtube.com/embed/" + this.videoCurrentlyDisplayed.link);
     }
-    else return null;
+    else return '';
   }
 
+  closeAnnonce() {
+    const endAnnonceDisplay = new Date()
+
+    this.displayAnnonce = false;
+
+    this.annonce.tmp_vue = endAnnonceDisplay.getTime() - this.startAnnonceDisplay.getTime();
+
+    this.msg.Update('annonce', this.annonce).subscribe(res=> {
+      if(res.status === 'error') {
+        this.errorMessage.sendError(res.data.reason);
+      }
+      else {
+        this.annonce = res.data;
+      }
+    });
+  }
+
+  getVideoTitle(video: Video): string {
+    if (typeof video !== 'undefined') return video.title;
+    return null;
+  }
+
+  getAnnonceText(annonce: Annonce): string {
+    if (typeof annonce !== 'undefined') return annonce.text;
+    return null;
+  }
 }
 

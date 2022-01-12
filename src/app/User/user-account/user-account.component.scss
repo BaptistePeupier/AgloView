@@ -1,0 +1,17 @@
+@import "src/scss/styles";
+
+.mat-card {
+  max-width: 25%;
+  margin-top: 10%;
+  margin-left: 37.5%;
+  text-align: center;
+}
+
+.backIcon {
+  margin-right: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: $themeColor;
+  }
+}

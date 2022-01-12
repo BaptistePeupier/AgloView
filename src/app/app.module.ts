@@ -48,6 +48,9 @@ import { AdminPopupComponent } from './Admin/admin-home/list-admins/admin-popup/
 import { AnnonceurPopupComponent } from './Admin/admin-home/list-annonceur/annonceur-popup/annonceur-popup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {YouTubePlayerModule} from '@angular/youtube-player';
+import { UserAccountComponent } from './User/user-account/user-account.component';
+import { UserPasswordComponent } from './User/user-account/user-password/user-password.component';
+import { SafePipeResourceUrlPipe } from './User/user-home/safe-pipe-resource-url.pipe';
 
 @NgModule({
   declarations: [
@@ -76,7 +79,10 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     AdminNavbarComponent,
     UserPopupComponent,
     AdminPopupComponent,
-    AnnonceurPopupComponent
+    AnnonceurPopupComponent,
+    UserAccountComponent,
+    UserPasswordComponent,
+    SafePipeResourceUrlPipe
   ],
     imports: [
         FormsModule,
