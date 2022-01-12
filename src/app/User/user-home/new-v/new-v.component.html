@@ -1,0 +1,82 @@
+<div class="wrapper">
+  <!-- Sidebar  -->
+  <nav id="sidebar">
+
+    <div class="sidebar-header nav">
+      <a class=" nav-link" href="#">
+        <img src="assets/parametre.png" width="30" />
+      </a>
+      <a class=" nav-link text-center" href="#">
+        <img src="assets/profil.png" width="100" />
+      </a>
+    </div>
+
+    <ul class="list-unstyled text-center">
+      <p>User Name</p>
+
+      <nav class="nav navbarp ">
+        <a class="nav-item nav-link">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn buttonPlay " id="dropdownBasic1" ngbDropdownToggle>Playlist 1</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Video1</button>
+              <button ngbDropdownItem>Video2</button>
+              <button ngbDropdownItem>Video3</button>
+            </div>
+          </div>
+        </a>
+        <a class="nav-item nav-link align-self-end" >
+          <img src="assets/plus.png" width="40" />
+        </a>
+      </nav>
+
+
+      <div class="position-absolute bottom-0 text-center">
+        <a class="nav-item nav-link" >
+          <img src="assets/Capture.PNG" width="75"  alt=""/>
+        </a>
+      </div>
+    </ul>
+  </nav>
+
+  <!-- Page Content  -->
+  <div id="content">
+
+    <nav class="nav navbar nav-pills nav-justified nav-fill">
+      <a class="nav-item nav-link" >
+        <img src="assets/fleche.png" width="75" />
+      </a>
+      <a class="nav-item nav-link" >
+        <img src="assets/loop.png" width="75" />
+      </a>
+      <a class="nav-item nav-link" >
+        <img src="assets/alea.png" width="75" />
+      </a>
+      <a class="nav-item nav-link" >
+        <img src="assets/fleche-R.png" width="75" />
+      </a>
+    </nav>
+
+    <div class="container text-center h-100 align-items-center ">
+
+      <p>New Vidéo</p>
+
+      <form class=" text-center">
+
+        <div class=" text-center">
+          <input type="text" class="form-control" id="PlaylistName" placeholder="Vidéo Link">
+        </div>
+        <div class="col-auto ">
+          <button type="submit" class="btn btn-primary mb-3">Confirm</button>
+        </div>
+      </form>
+
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+
+  </div>
+</div>
+<p>new-p works!</p>
+<p>new-v works!</p>
