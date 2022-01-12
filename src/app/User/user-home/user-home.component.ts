@@ -7,6 +7,7 @@ import {AnnoncePopupComponent} from '../../Annonceur/annonce-popup/annonce-popup
 import {DeletePopupComponent} from '../../Common/delete-popup/delete-popup.component';
 import {PlaylistPopupComponent} from './playlist-popup/playlist-popup.component';
 import {VideoPopupComponent} from './video-popup/video-popup.component';
+import {init} from 'protractor/built/launcher';
 
 @Component({
   selector: 'app-user-home',
@@ -167,7 +168,13 @@ export class UserHomeComponent implements OnInit {
     else {
       this.videoCurrentlyDisplayed = video;
       this.currentPlaylist = playlist;
-      this.player.loadVideoById(this.videoCurrentlyDisplayed.link);
+
+      if (typeof this.player !== 'undefined') {
+        this.player.loadVideoById(this.videoCurrentlyDisplayed.link);
+      }
+      else {
+        this.init();
+      }
     }
   }
 
