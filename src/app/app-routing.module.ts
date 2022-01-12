@@ -16,6 +16,8 @@ import {AdminPasswordComponent} from './Admin/admin-account/admin-password/admin
 import {AdminGuard} from './Admin/admin.guard';
 import {UserPasswordComponent} from './User/user-account/user-password/user-password.component';
 import {UserAccountComponent} from './User/user-account/user-account.component';
+import { NewPComponent} from "./new-p/new-p.component";
+import { NewVComponent} from "./new-v/new-v.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: '', canActivateChild: [UserGuard], children: [                      // All others routes are accessible only for a logged User
       {path: 'UserHome', component: UserHomeComponent},
       {path: 'UserAccount', component: UserAccountComponent},
-      {path: 'UserPassword', component: UserPasswordComponent}
+      {path: 'UserPassword', component: UserPasswordComponent}, 
+      {path : 'newp' , component: NewPComponent}, 
+      {path : 'newv', component: NewVComponent}
     ]
   },
 
