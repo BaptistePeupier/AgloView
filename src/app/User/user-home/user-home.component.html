@@ -9,6 +9,9 @@
       <a class=" nav-link text-center" routerLink="/UserAccount">
         <img src="assets/profil.png" width="100"  alt=""/>
       </a>
+      <a class=" nav-link" style="cursor: pointer" (click)="auth.logout()">
+        <img src="assets/logout_icon_151219.png" width="30"  alt=""/>
+      </a>
     </div>
 
     <ul class="list-unstyled components text-center">
@@ -19,7 +22,7 @@
           <div *ngFor="let playlist of playlists" ngbDropdown class="d-inline-block">
             <button class="btn buttonPlay " id="dropdownBasic1" ngbDropdownToggle>{{playlist.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button *ngFor="let video of playlist.videos" ngbDropdownItem (click)="getVideoLink(video)">{{video.title}}</button>
+              <button *ngFor="let video of playlist.videos" ngbDropdownItem (click)="getVideoLink(video)">{{getVideoTitle(video)}}</button>
             </div>
           </div>
         </a>
@@ -57,12 +60,12 @@
     </nav>
 
     <mat-card *ngIf="displayAnnonce == true" class="alert" >
-      <mat-label>{{annonce.text}}</mat-label>
+      <mat-label>{{getAnnonceText(annonce)}}</mat-label>
       <mat-icon class="closebtn" (click)="closeAnnonce()">close</mat-icon>
     </mat-card>
 
     <iframe width="100%" height="70%"
-            [src]="getVideoLink(null)"
+            [src]="getVideoLink(null) | safePipeResourceUrl"
             frameborder="0"
             webkitallowfullscreen
             mozallowfullscreen
@@ -70,7 +73,7 @@
     </iframe>
 
     <mat-card *ngIf="displayAnnonce == true" class="alert" >
-      <mat-label>{{annonce.text}}</mat-label>
+      <mat-label>{{getAnnonceText(annonce)}}</mat-label>
       <mat-icon class="closebtn" (click)="closeAnnonce()">close</mat-icon>
     </mat-card>
   </div>

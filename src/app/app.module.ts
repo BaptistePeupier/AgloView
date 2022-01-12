@@ -50,6 +50,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {YouTubePlayerModule} from '@angular/youtube-player';
 import { UserAccountComponent } from './User/user-account/user-account.component';
 import { UserPasswordComponent } from './User/user-account/user-password/user-password.component';
+import { SafePipeResourceUrlPipe } from './User/user-home/safe-pipe-resource-url.pipe';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { UserPasswordComponent } from './User/user-account/user-password/user-pa
     AdminPopupComponent,
     AnnonceurPopupComponent,
     UserAccountComponent,
-    UserPasswordComponent
+    UserPasswordComponent,
+    SafePipeResourceUrlPipe
   ],
     imports: [
         FormsModule,

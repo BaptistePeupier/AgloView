@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Annonce, Playlist, Video} from '../../Common/Schemas/classes';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthenticationService} from '../../authentication.service';
@@ -23,8 +22,7 @@ export class UserHomeComponent implements OnInit {
 
   constructor(private msg: MessageService,
               public auth: AuthenticationService,
-              public dialog: MatDialog,
-              private sanitizer: DomSanitizer) {
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -60,7 +58,7 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  getVideoLink(video: Video = null) : SafeResourceUrl {
+  getVideoLink(video: Video = null) : string {
     if (video === null) {
       if ((this.videoCurrentlyDisplayed === null) && (this.playlists.length !== 0) && (typeof this.playlists[0].videos[0] !== 'undefined')) {
         this.videoCurrentlyDisplayed = this.playlists[0].videos[0];
@@ -71,9 +69,9 @@ export class UserHomeComponent implements OnInit {
     }
 
     if (this.videoCurrentlyDisplayed !== null) {
-      return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.videoCurrentlyDisplayed.link);
+      return ("https://www.youtube.com/embed/" + this.videoCurrentlyDisplayed.link);
     }
-    else return null;
+    else return '';
   }
 
   closeAnnonce() {
@@ -91,6 +89,16 @@ export class UserHomeComponent implements OnInit {
         this.annonce = res.data;
       }
     });
+  }
+
+  getVideoTitle(video: Video): string {
+    if (typeof video !== 'undefined') return video.title;
+    return null;
+  }
+
+  getAnnonceText(annonce: Annonce): string {
+    if (typeof annonce !== 'undefined') return annonce.text;
+    return null;
   }
 }
 
