@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewPComponent } from './new-p.component';
+import { PlaylistPopupComponent } from './playlist-popup.component';
 
 describe('NewPComponent', () => {
-  let component: NewPComponent;
-  let fixture: ComponentFixture<NewPComponent>;
+  let component: PlaylistPopupComponent;
+  let fixture: ComponentFixture<PlaylistPopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewPComponent ]
+      declarations: [ PlaylistPopupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewPComponent);
+    fixture = TestBed.createComponent(PlaylistPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

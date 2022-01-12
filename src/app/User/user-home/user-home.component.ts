@@ -3,6 +3,10 @@ import {Annonce, Playlist, Video} from '../../Common/Schemas/classes';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthenticationService} from '../../authentication.service';
 import {MessageService} from '../../message.service';
+import {AnnoncePopupComponent} from '../../Annonceur/annonce-popup/annonce-popup.component';
+import {DeletePopupComponent} from '../../Common/delete-popup/delete-popup.component';
+import {PlaylistPopupComponent} from './playlist-popup/playlist-popup.component';
+import {VideoPopupComponent} from './video-popup/video-popup.component';
 
 @Component({
   selector: 'app-user-home',
@@ -51,7 +55,7 @@ export class UserHomeComponent implements OnInit {
               this.playlists[i] = res.data;
 
               if (this.videoCurrentlyDisplayed == null) {
-                this.getVideoLink();
+                this.launchVideo();
                 this.init();
               }
             }
@@ -87,6 +91,45 @@ export class UserHomeComponent implements OnInit {
     window['onYouTubeIframeAPIReady'] = () => this.startVideo();
   }
 
+  startVideo() {
+    this.reframed = false;
+    this.player = new window['YT'].Player('player', {
+      videoId: this.videoCurrentlyDisplayed.link,
+      width: '100%',
+      height: '70%',
+      playerVars: {
+        autoplay: 1,
+        modestbranding: 1,
+        controls: 1,
+        rel: 0,
+        showinfo: 0,
+        playsinline: 1
+      },
+      events: {
+        'onStateChange': this.onPlayerStateChange.bind(this),
+        'onReady': this.onPlayerReady.bind(this),
+      }
+    });
+  }
+
+  /* It will be called when the Video Player is ready */
+  onPlayerReady(event) {
+    event.target.playVideo();
+  }
+
+  /* API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
+  onPlayerStateChange(event) {
+    switch (event.data) {
+      case window['YT'].PlayerState.PLAYING:
+        break;
+      case window['YT'].PlayerState.PAUSED:
+        break;
+      case window['YT'].PlayerState.ENDED:
+        this.getNextVideo();
+        break;
+    }
+  }
+
   closeAnnonce() {
     const endAnnonceDisplay = new Date()
 
@@ -114,7 +157,7 @@ export class UserHomeComponent implements OnInit {
     return null;
   }
 
-  getVideoLink(playlist: Playlist = null, video: Video = null) : string {
+  launchVideo(playlist: Playlist = null, video: Video = null) {
     if (video === null) {
       if ((this.videoCurrentlyDisplayed === null) && (this.playlists.length !== 0) && (typeof this.playlists[0].videos[0] !== 'undefined')) {
         this.videoCurrentlyDisplayed = this.playlists[0].videos[0];
@@ -124,12 +167,8 @@ export class UserHomeComponent implements OnInit {
     else {
       this.videoCurrentlyDisplayed = video;
       this.currentPlaylist = playlist;
+      this.player.loadVideoById(this.videoCurrentlyDisplayed.link);
     }
-
-    if (this.videoCurrentlyDisplayed !== null) {
-      return this.videoCurrentlyDisplayed.link;
-    }
-    else return '';
   }
 
   getNextVideo() {
@@ -164,58 +203,73 @@ export class UserHomeComponent implements OnInit {
     this.player.loadVideoById(this.videoCurrentlyDisplayed.link);
   }
 
-  startVideo() {
-    this.reframed = false;
-    this.player = new window['YT'].Player('player', {
-      videoId: this.videoCurrentlyDisplayed.link,
-      width: '100%',
-      height: '70%',
-      playerVars: {
-        autoplay: 1,
-        modestbranding: 1,
-        controls: 1,
-        disablekb: 1,
-        rel: 0,
-        showinfo: 0,
-        fs: 0,
-        playsinline: 1
-      },
-      events: {
-        'onStateChange': this.onPlayerStateChange.bind(this),
-        'onError': this.onPlayerError.bind(this),
-        'onReady': this.onPlayerReady.bind(this),
+  CreatePlaylist() {
+    const dialogRef = this.dialog.open(PlaylistPopupComponent, {
+      width: '20%',
+      data: null
+    });
+
+    dialogRef.afterClosed().subscribe(createdPlaylist => {
+      if (createdPlaylist != undefined) {
+        this.playlists.push(createdPlaylist);
       }
     });
   }
 
-  /* It will be called when the Video Player is ready */
-  onPlayerReady(event) {
-    event.target.playVideo();
+  UpdatePlaylist(playlist: Playlist) {
+    this.dialog.open(PlaylistPopupComponent, {
+      width: '20%',
+      data: playlist
+    });
   }
 
-  /* API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
-  onPlayerStateChange(event) {
-    switch (event.data) {
-      case window['YT'].PlayerState.PLAYING:
-        break;
-      case window['YT'].PlayerState.PAUSED:
-        break;
-      case window['YT'].PlayerState.ENDED:
-        this.getNextVideo();
-        break;
-    }
+  DeletePlaylist(playlistToDelete: Playlist) {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '20%',
+      data: {object: {playlist_id: playlistToDelete._id}, type: 'playlist'}
+    });
+
+    dialogRef.afterClosed().subscribe(DeletedPlaylist => {
+      if (DeletedPlaylist != undefined) {
+        this.playlists = this.playlists.filter(playlist => playlist._id !== playlistToDelete._id);
+        this.launchVideo();
+      }
+    });
   }
 
-  onPlayerError(event) {
-    switch (event.data) {
-      case 2:
-        console.log('' + this.videoCurrentlyDisplayed)
-        break;
-      case 100:
-        break;
-      case 101 || 150:
-        break;
-    }
+  CreateVideo(playlist: Playlist) {
+    const dialogRef = this.dialog.open(VideoPopupComponent, {
+      width: '20%',
+      data: playlist
+    });
+
+    dialogRef.afterClosed().subscribe(createdVideo => {
+      if (createdVideo != undefined) {
+        playlist.videos.push(createdVideo);
+      }
+    });
   }
 
+  DeleteVideo(playlist: Playlist, videoToDelete: Video) {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '20%',
+      data: {object: {video_id: videoToDelete._id}, type: 'video'}
+    });
+
+    dialogRef.afterClosed().subscribe(DeletedVideo => {
+      if (DeletedVideo != undefined) {
+        let tmpVideos: [Video] = [undefined];
+
+        tmpVideos.pop();
+        for (let i = 0; i < playlist.videos.length; i++) {
+          if (playlist.videos[i]._id !== videoToDelete._id) {
+            tmpVideos.push(playlist.videos[i])
+          }
+        }
+
+        playlist.videos = tmpVideos;
+        this.launchVideo();
+      }
+    });
+  }
 }

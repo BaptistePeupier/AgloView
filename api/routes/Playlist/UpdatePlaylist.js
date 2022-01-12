@@ -8,17 +8,18 @@ async function UpdatePlaylist(req, res) {
   if (isUser(req, res)) {
     // Check fields.
     if (
-      (typeof req.body.playlist_id !== 'undefined') && (req.body.playlist_id !== null) &&
+      (typeof req.body._id !== 'undefined') && (req.body._id !== null) &&
       (typeof req.body.name !== 'undefined') && (req.body.name !== null)
     ) {
       // Check if the User own the Playlist
       const user = await Users.findOne({_id: getUserID(req)});
-      const playlist = user.playlists.filter(playlist => playlist._id.toString() === req.body.playlist_id)[0];
+      const playlist = user.playlists.filter(playlist => playlist._id.toString() === req.body._id)[0];
 
       if (typeof playlist !== 'undefined') {
         // Update playlist's name
-        Playlists.updateOne({_id: req.body.playlist_id},{name: req.body.name}, (err, resp) => {
+        Playlists.updateOne({_id: req.body._id},{name: req.body.name}, (err, resp) => {
           if (err) return sendError(res, err);
+          req.query.playlist_id = req.body._id;
           ReadPlaylist(req, res);
         })
       }
