@@ -19,21 +19,29 @@
 
       <nav class="nav navbarp ">
         <a class="nav-item nav-link">
-          <div *ngFor="let playlist of playlists" ngbDropdown class="d-inline-block">
-            <button class="btn buttonPlay " id="dropdownBasic1" ngbDropdownToggle>{{playlist.name}}</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button *ngFor="let video of playlist.videos" ngbDropdownItem (click)="getVideoLink(video)">{{getVideoTitle(video)}}</button>
+          <div *ngFor="let playlist of playlists" ngbDropdown class="d-inline-block" style="clear: both; float: left; padding-bottom: 40px">
+            <div style="display:inline-block; vertical-align:middle">
+              <button class="btn buttonPlay " id="dropdownBasic1" ngbDropdownToggle>{{playlist.name}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let video of playlist.videos" ngbDropdownItem (click)="launchVideo(playlist, video)">
+                  <mat-icon style="cursor: pointer; display:inline-block; vertical-align:middle" (click)="DeleteVideo(playlist, video)">delete_forever</mat-icon>
+                  <span style="display:inline-block; vertical-align:middle">{{getVideoTitle(video)}}</span>
+                </button>
+              </div>
             </div>
+
+            <a style="position: absolute; padding-left: 10px; display:inline-block; vertical-align:middle">
+              <mat-icon style="display: block; cursor: pointer" (click)="CreateVideo(playlist)">playlist_add</mat-icon>
+              <mat-icon style="display: block; cursor: pointer" (click)="UpdatePlaylist(playlist)">build</mat-icon>
+              <mat-icon style="display: block; cursor: pointer" (click)="DeletePlaylist(playlist)">delete_forever</mat-icon>
+            </a>
           </div>
-        </a>
-        <a class="nav-item nav-link align-self-end" >
-          <img src="assets/plus.png" width="40"  alt=""/>
         </a>
       </nav>
 
 
       <div class="position-absolute bottom-0 text-center">
-        <a class="nav-item nav-link" >
+        <a class="nav-item nav-link" (click)="CreatePlaylist()">
           <img src="assets/Capture.PNG" width="75"  alt=""/>
         </a>
       </div>
@@ -45,16 +53,18 @@
     <app-error-message #errorMessageComponent></app-error-message>
 
     <nav class="nav navbar nav-pills nav-justified nav-fill">
-      <a class="nav-item nav-link" >
+      <a class="nav-item nav-link" (click)="getPreviousVideo()" >
         <img src="assets/fleche.png" width="75"  alt=""/>
       </a>
       <a class="nav-item nav-link" >
-        <img src="assets/loop.png" width="75"  alt=""/>
+        <img *ngIf="!loop" src="assets/loop.png" width="75" (click)="loop = !loop"  alt=""/>
+        <img *ngIf="loop" src="assets/loopvert.png" width="75" (click)="loop = !loop"  alt=""/>
       </a>
-      <a class="nav-item nav-link" >
-        <img src="assets/alea.png" width="75"  alt=""/>
+      <a class="nav-item nav-link" (click)="random = !random" >
+        <img *ngIf="!random" src="assets/alea.png" width="75"  alt=""/>
+        <img *ngIf="random" src="assets/aleavert.png" width="75"  alt=""/>
       </a>
-      <a class="nav-item nav-link" >
+      <a class="nav-item nav-link" (click)="getNextVideo()" >
         <img src="assets/fleche-R.png" width="75"  alt=""/>
       </a>
     </nav>
@@ -64,13 +74,7 @@
       <mat-icon class="closebtn" (click)="closeAnnonce()">close</mat-icon>
     </mat-card>
 
-    <iframe width="100%" height="70%"
-            [src]="getVideoLink(null) | safePipeResourceUrl"
-            frameborder="0"
-            webkitallowfullscreen
-            mozallowfullscreen
-            allowfullscreen>
-    </iframe>
+    <div id="player"></div>
 
     <mat-card *ngIf="displayAnnonce == true" class="alert" >
       <mat-label>{{getAnnonceText(annonce)}}</mat-label>

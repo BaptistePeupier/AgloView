@@ -96,3 +96,30 @@ export function cloneUserValues(user1: User, user2: User) {
   user2.tags      = Object.assign([],user1.tags);
   user2.playlists = Object.assign([],user1.playlists);
 }
+
+export function createPlaylist(): Playlist {
+  const newPlaylist: Playlist = {
+    _id: null,
+    name: null,
+    videos: [null]
+  }
+
+  newPlaylist.videos.pop();
+
+  return newPlaylist;
+}
+
+// Clone the value of the playlist1 to the playlist2
+export function clonePlaylistValues(playlist1: Playlist, playlist2: Playlist) {
+  playlist2._id     = playlist1._id;
+  playlist2.name    = playlist1.name;
+  playlist2.videos  = Object.assign([], playlist1.videos);
+}
+
+export function createVideo(): Video {
+  return {
+    _id: null,
+    link: null,
+    title: null
+  }
+}

@@ -25,6 +25,8 @@ import { AdminHomeComponent } from './Admin/admin-home/admin-home.component';
 import { ListUsersComponent } from './Admin/admin-home/list-users/list-users.component';
 import { ListAnnonceursComponent } from './Admin/admin-home/list-annonceur/list-annonceurs.component';
 import { ListAdminsComponent } from './Admin/admin-home/list-admins/list-admins.component';
+import { PlaylistPopupComponent } from './User/user-home/playlist-popup/playlist-popup.component';
+import { VideoPopupComponent } from './User/user-home/video-popup/video-popup.component';
 
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -82,7 +84,9 @@ import { SafePipeResourceUrlPipe } from './User/user-home/safe-pipe-resource-url
     AnnonceurPopupComponent,
     UserAccountComponent,
     UserPasswordComponent,
-    SafePipeResourceUrlPipe
+    SafePipeResourceUrlPipe,
+    PlaylistPopupComponent,
+    VideoPopupComponent,
   ],
     imports: [
         FormsModule,
