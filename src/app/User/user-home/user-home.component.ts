@@ -16,9 +16,7 @@ import {init} from 'protractor/built/launcher';
 })
 export class UserHomeComponent implements OnInit {
   /* Some required variables which will be used by YT API*/
-  public YT: any;
   public player: any;
-  public reframed: Boolean = false;
 
   playlists : Playlist[] = [];
   videoCurrentlyDisplayed: Video = null;
@@ -93,7 +91,6 @@ export class UserHomeComponent implements OnInit {
   }
 
   startVideo() {
-    this.reframed = false;
     this.player = new window['YT'].Player('player', {
       videoId: this.videoCurrentlyDisplayed.link,
       width: '100%',
